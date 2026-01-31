@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #501786;
+    transition: opacity 0.3s;
+    z-index: 1000;
+    padding: 15px 15px 15px 15px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.nav-container {
+    max-width: 75%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.menu li a {
+    font-family: "michroma", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.menu li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #a855f7;
+    transition: width 0.3s ease-out;
+}
+
+.menu li a:hover::after {
+    width: 100%;
+}
+
+.logo {
+    font-family: "michroma", sans-serif;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    background-color: #0d0616;
+    color: white;
+    min-height: 100vh;
+}
+
+#start {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.circle-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ffffff;
+}
+
+.block {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.hero-content {
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-text {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.hero-text h1 {
+    font-family: 'Michroma', sans-serif;
+    font-size: 2.5rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-title {
+    color: #ffffff;
+    font-family: 'michroma', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'michroma', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+}
+
+.section-content {
+    max-width: 800px;
+    padding: 20px;
+}
+
+
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.social-media a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    color: white;
+    font-size: 36px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    transform: scale(1.1);
+}
+
+/* Facebook */
+.social-media a[title="Facebook"]:hover {
+    background: rgba(66, 103, 178, 0.4);
+    border-color: #4267B2;
+    box-shadow: 0 0 25px rgba(66, 103, 178, 0.6);
+}
+
+/* Instagram */
+.social-media a[title="Instagram"]:hover {
+    background: rgba(225, 48, 108, 0.4);
+    border-color: #E1306C;
+    box-shadow: 0 0 25px rgba(225, 48, 108, 0.6);
+}
+
+/* TikTok */
+.social-media a[title="TikTok"]:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: #FFFFFF;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+/* YouTube */
+.social-media a[title="YouTube"]:hover {
+    background: rgba(255, 0, 0, 0.4);
+    border-color: #FF0000;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+}
+
+/* Twitch */
+.social-media a[title="Twitch"]:hover {
+    background: rgba(145, 70, 255, 0.4);
+    border-color: #9146FF;
+    box-shadow: 0 0 25px rgba(145, 70, 255, 0.6);
+}
+
+/* Spotify */
+.social-media a[title="Spotify"]:hover {
+    background: rgba(30, 215, 96, 0.4);
+    border-color: #1ED760;
+    box-shadow: 0 0 25px rgba(30, 215, 96, 0.6);
+}
