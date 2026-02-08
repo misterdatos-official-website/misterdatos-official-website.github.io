@@ -11,9 +11,6 @@
     --spacing-md: 15px;
     --spacing-lg: 20px;
     --spacing-xl: 25px;
-
-    --transition: all 0.3s ease;
-    --transition-out: all 0.3s ease-out;
 }
 
 * {
@@ -38,7 +35,7 @@ main {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: var(--spacing-sm);
+    width: 100%;
 }
 
 /* ==================== PROFILE CONTAINER ==================== */
@@ -69,15 +66,12 @@ main {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    margin: 0;
 }
 
 .profile-bio {
     font-size: 1rem;
     letter-spacing: 1px;
     color: var(--color-white-90);
-    text-transform: uppercase;
-    margin: 0;
 }
 
 /* ==================== SOCIAL LINKS NAVIGATION ==================== */
