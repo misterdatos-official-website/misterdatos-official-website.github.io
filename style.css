@@ -7,6 +7,7 @@
     --color-white-90: rgba(255, 255, 255, 0.9);
 
     --font-main: 'Michroma', sans-serif;
+    --spacing-xs: 5px;
     --spacing-sm: 10px;
     --spacing-md: 15px;
     --spacing-lg: 20px;
@@ -167,6 +168,22 @@ main {
     background: linear-gradient(135deg, #365A9E, #4A6DC9);
 }
 
+.facebook-link {
+    background: linear-gradient(135deg, #4267B2, #5A7FD4);
+}
+
+.facebook-link:hover {
+    background: linear-gradient(135deg, #365A9E, #4A6DC9);
+}
+
+.discord-link {
+    background: linear-gradient(135deg, #5865F2, #7289DA);
+}
+
+.discord-link:hover {
+    background: linear-gradient(135deg, #4752C4, #5B70C0);
+}
+
 /* ==================== FOOTER ==================== */
 
 footer {
@@ -181,17 +198,17 @@ footer {
 
 @media (min-width: 768px) {
     main {
-        padding: var(--spacing-xl);
+        padding: var(--spacing-xs);
     }
 
     .profile-container {
-        max-width: 400px;
+        max-width: 300px;
         gap: var(--spacing-sm);
     }
 
     .profile-avatar {
-        width: 100px;
-        height: 100px;
+        width: 75px;
+        height: 75px;
     }
 
     .profile-name {
@@ -204,15 +221,15 @@ footer {
     }
 
     .social-links ul {
-        gap: 15px;
+        gap: 10px;
     }
 
     .social-link {
         padding: 12px 12px;
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .social-link i {
-        font-size: 18px;
+        font-size: 20px;
     }
 }
