@@ -1,0 +1,54 @@
+---
+import BaseHead from "../components/basehead.astro";
+import Footer from "../components/footer.astro";
+import NavBar from "../components/navbar.astro";
+
+const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead />
+		<title>{title}</title>
+	</head>
+	<body>
+		<header>
+			<NavBar />
+		</header>
+		<main>
+			<slot />
+		</main>
+		<Footer />
+		<style is:global>
+			:root {
+				--color-primary: #541f52;
+				--color-dark: #1c0a1b;
+				--color-accent: #9146ff;
+				--color-white: #ffffff;
+				--font-main: "Michroma", sans-serif;
+				--transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+			}
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				scroll-behavior: smooth;
+				overflow-y: scroll;
+				overflow-x: hidden;
+			}
+			body {
+				background-color: var(--color-dark);
+				font-family: var(--font-main);
+				color: var(--color-white);
+				overflow-x: hidden;
+			}
+			header {
+				width: 100%;
+				z-index: 1000;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,217 @@
+---
+interface Props {
+    className?: string;
+    copyrightText?: string;
+}
+
+const {
+    className = "Footer",
+    copyrightText = "© 2026 MisterDatos. All rights reserved.",
+} = Astro.props;
+---
+
+<footer class={className} id="redes">
+    <div class="social-container">
+        <a
+            href="https://www.youtube.com/@misterdatos_oficial"
+            class="social-icon youtube"
+            target="_blank"
+            rel="noopener"
+            aria-label="YouTube"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.46-5.58z"
+                ></path><polygon
+                    points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"
+                ></polygon></svg
+            >
+        </a>
+        <a
+            href="https://www.twitch.tv/misterdatos/about"
+            class="social-icon twitch"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitch"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"
+                ></path></svg
+            >
+        </a>
+        <a
+            href="https://www.tiktok.com/@misterdatos"
+            class="social-icon tiktok"
+            target="_blank"
+            rel="noopener"
+            aria-label="TikTok"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg
+            >
+        </a>
+        <a
+            href="https://www.instagram.com/misterdatos_oficial/"
+            class="social-icon instagram"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><rect x="2" y="2" width="20" height="20" rx="5" ry="5"
+                ></rect><path
+                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"
+                ></line></svg
+            >
+        </a>
+        <a
+            href="https://www.facebook.com/misterdatos/"
+            class="social-icon facebook"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path></svg
+            >
+        </a>
+        <a
+            href="https://discord.gg/RCfykChbC9"
+            class="social-icon discord"
+            target="_blank"
+            rel="noopener"
+            aria-label="Discord"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                    d="M20.222 4.587C18.815 3.869 17.313 3.337 15.73 3a.11.11 0 0 0-.117.056c-.195.348-.41.796-.562 1.148a10.878 10.878 0 0 0-3.048 0c-.155-.352-.376-.8-.577-1.148a.112.112 0 0 0-.118-.056 15.222 15.222 0 0 0-4.492 1.587.108.108 0 0 0-.046.043C4.127 8.356 3.34 12.02 3.69 15.632a.117.117 0 0 0 .045.083 15.42 15.42 0 0 0 4.67 2.378.113.113 0 0 0 .124-.04c.36-.492.684-.997.962-1.533a.114.114 0 0 0-.063-.158 10.16 10.16 0 0 1-1.464-.698.114.114 0 0 1-.012-.19c.1-.073.2-.151.295-.23a.11.11 0 0 1 .116-.015c3.085 1.417 6.43 1.417 9.475 0a.11.11 0 0 1 .117.014c.096.079.196.157.296.23a.114.114 0 0 1-.01.19 10.14 10.14 0 0 1-1.466.699.114.114 0 0 0-.063.158c.278.534.6 1.04.961 1.531a.114.114 0 0 0 .125.042 15.394 15.394 0 0 0 4.671-2.378.116.116 0 0 0 .046-.082c.427-4.14-.72-7.78-3.037-11.002a.108.108 0 0 0-.045-.043zM8.99 12.784c-.9 0-1.642-.828-1.642-1.844s.725-1.845 1.642-1.845c.92 0 1.656.837 1.642 1.845 0 1.016-.723 1.844-1.642 1.844zm6.035 0c-.9 0-1.642-.828-1.642-1.844s.725-1.845 1.642-1.845c.92 0 1.656.837 1.642 1.845 0 1.016-.722 1.844-1.642 1.844z"
+                ></path></svg
+            >
+        </a>
+    </div>
+    <p>{copyrightText}</p>
+</footer>
+
+<style>
+    .Footer {
+        text-align: center;
+        padding: 30px 20px;
+        background: rgba(28, 10, 27, 0.95);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .social-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-icon:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+
+    .youtube {
+        background-color: #ff0000;
+    }
+    .twitch {
+        background-color: #9146ff;
+    }
+    .tiktok {
+        background-color: #010101;
+        border: 1px solid #444;
+    }
+    .instagram {
+        background: linear-gradient(
+            45deg,
+            #f09433 0%,
+            #e6683c 25%,
+            #dc2743 50%,
+            #cc2366 75%,
+            #bc1888 100%
+        );
+    }
+    .facebook {
+        background-color: #1877f2;
+    }
+    .discord {
+        background-color: #5865f2;
+    }
+
+    .Footer p {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+    }
+</style>

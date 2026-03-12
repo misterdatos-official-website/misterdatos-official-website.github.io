@@ -1,58 +1,67 @@
 {
-  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.framework.startCommand": "npm run dev",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets",
+    "relative": true
+  },
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "content",
+      "path": "[[workspace]]/src/content"
+    }
+  ],
   "frontMatter.taxonomy.contentTypes": [
     {
       "name": "default",
       "pageBundle": false,
-      "previewPath": null,
+      "previewPath": "blog",
       "fields": [
         {
-          "title": "Title",
           "name": "title",
           "type": "string"
         },
         {
-          "title": "Description",
-          "name": "description",
-          "type": "string"
+          "name": "slug",
+          "type": "slug"
         },
         {
-          "title": "Publishing date",
-          "name": "date",
-          "type": "datetime",
-          "default": "{{now}}",
-          "isPublishDate": true
-        },
-        {
-          "title": "Content preview",
-          "name": "preview",
-          "type": "image"
-        },
-        {
-          "title": "Is in draft",
           "name": "draft",
           "type": "draft"
         },
         {
-          "title": "Tags",
+          "title": "date",
+          "name": "date",
+          "type": "datetime"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "tags",
           "name": "tags",
           "type": "tags"
         },
         {
-          "title": "Categories",
+          "title": "categories",
           "name": "categories",
           "type": "categories"
+        },
+        {
+          "title": "keywords",
+          "name": "keywords",
+          "type": "tags"
+        },
+        {
+          "title": "image",
+          "name": "image",
+          "type": "image"
         }
       ]
     }
   ],
-  "frontMatter.framework.id": "other",
-  "frontMatter.content.publicFolder": "",
-  "frontMatter.git.enabled": true,
-  "frontMatter.content.pageFolders": [
-    {
-      "title": "content",
-      "path": "[[workspace]]/content"
-    }
-  ]
+  "frontMatter.git.enabled": true
 }

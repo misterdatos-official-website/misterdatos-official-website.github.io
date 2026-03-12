@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import LayoutNoNav from '../layouts/LayoutNoNav.astro';
+import '../styles/socials.css';
+import avatar from '../assets/main.png';
+import ReturnButton from '../components/return_button.astro';
+---
+
+<LayoutNoNav title="MisterDatos | Link In Bio">
+	<ReturnButton />
+	<div class="profile-container">
+		<Image src={avatar} class="profile-avatar" alt="MisterDatos's avatar" loading="eager" width={150} height={150}/>
+
+		<h1 class="profile-name">@MisterDatos</h1>
+		
+		<p class="profile-bio">"The Fun Facts Guy"</p>
+
+		<nav class="social-links" aria-label="Social Media">
+			<ul>
+				<li><a href="https://www.youtube.com/@misterdatos_oficial" class="social-link youtube-link" target="_blank" rel="noopener" aria-label="YouTube">
+					<i class="fab fa-youtube"></i>
+					<span>YouTube</span>
+				</a></li>
+				<li><a href="https://www.twitch.tv/misterdatos/about" class="social-link twitch-link" target="_blank" rel="noopener" aria-label="Twitch">
+					<i class="fab fa-twitch"></i>
+					<span>Twitch</span>
+				</a></li>
+				<li><a href="https://www.tiktok.com/@misterdatos" class="social-link tiktok-link" target="_blank" rel="noopener" aria-label="TikTok">
+					<i class="fab fa-tiktok"></i>
+					<span>TikTok</span>
+				</a></li>
+				<li><a href="https://www.instagram.com/misterdatos_oficial/" class="social-link instagram-link" target="_blank" rel="noopener" aria-label="Instagram">
+					<i class="fab fa-instagram"></i>
+					<span>Instagram</span>
+				</a></li>
+				<li><a href="https://www.facebook.com/misterdatos/" class="social-link facebook-link" target="_blank" rel="noopener" aria-label="Facebook">
+					<i class="fab fa-facebook"></i>
+					<span>Facebook</span>
+				</a></li>
+				<li><a href="https://discord.gg/RCfykChbC9" class="social-link discord-link" target="_blank" rel="noopener" aria-label="Discord">
+					<i class="fab fa-discord"></i>
+					<span>Discord</span>
+				</a></li>
+			</ul>
+		</nav>
+	</div>
+</LayoutNoNav>

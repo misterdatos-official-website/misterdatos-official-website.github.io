@@ -1,0 +1,175 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const publishDate = entry.data.date?.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={entry.data.title}>
+  <main class="post-container">
+    <div class="glow-bg"></div>
+
+    <article class="post-content">
+      <header class="post-header">
+        <div class="category-badge">{entry.data.categories?.[0] || 'Tech'}</div>
+        <h1 class="post-title">{entry.data.title}</h1>
+        
+        <div class="post-meta">
+          <span class="meta-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            {publishDate}
+          </span>
+          <span class="meta-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            {entry.data.author || 'MisterDatos'}
+          </span>
+        </div>
+        
+        {entry.data.image && (
+          <div class="image-wrapper">
+            <Image src={entry.data.image} alt={entry.data.title} class="featured-image" loading={"eager"} />
+          </div>
+        )}
+      </header>
+      
+      <section class="prose">
+        <Content />
+      </section>
+
+      {entry.data.tags && (
+        <footer class="post-footer">
+          <div class="tags-container">
+            {entry.data.tags.map(tag => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+        </footer>
+      )}
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .post-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    min-height: 100vh;
+  }
+
+  .glow-bg {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top, var(--color-primary) 0%, transparent 50%);
+    filter: blur(100px);
+    opacity: 0.1;
+    z-index: -1;
+  }
+
+  .post-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    line-height: 1.1;
+    margin: 1rem 0 2rem;
+    color: var(--color-white);
+    font-family: var(--font-main);
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 2rem;
+    color: #8892b0;
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .image-wrapper {
+    margin: 3rem 0;
+    width: 100%;
+  }
+
+  .featured-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .prose {
+    color: #cbd5e1;
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .prose :global(h2) {
+    color: var(--color-accent);
+    font-family: var(--font-main);
+    margin-top: 3rem;
+    font-size: 1.75rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(code) {
+    background: rgba(145, 70, 255, 0.1);
+    color: var(--color-accent);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .category-badge {
+    color: var(--color-accent);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+  }
+
+  .tags-container {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 1rem;
+  }
+
+  .tag {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    opacity: 0.7;
+  }
+
+  @media (min-width: 768px) {
+    .post-container { padding-top: 3rem; }
+  }
+</style>

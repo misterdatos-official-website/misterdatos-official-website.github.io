@@ -1,0 +1,276 @@
+---
+import { Image } from 'astro:assets';
+import misterdatosweb from '../assets/misterdatosweb.png';
+
+const projects = [
+  {
+    title: "Stream en Twitch",
+    subtitle: "Acompáñanos todos los viernes y sabados a las 9:00 PM",
+    image: misterdatosweb,
+    link: "https://www.twitch.tv/misterdatos",
+  },
+];
+---
+
+<div class="slider-container">
+  <div id="main-display" class="main-display">
+    {
+      projects.map((project, index) => (
+        <a
+          href={project.link} target="_blank" rel="noopener"
+          class={`slide ${index === 0 ? "active" : ""}`}
+          data-index={index}
+        >
+          <Image src={project.image} alt={project.title} width={800} height={400} loading="eager" quality="max" />
+          <div class="info">
+            <h2>{project.title}</h2>
+            <p>{project.subtitle}</p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="controls-overlay">
+    <button id="pause-btn" class="control-icon" aria-label="Pause/Play"
+    ></button>
+
+    <div class="thumbnails">
+      {
+        projects.map((project, index) => (
+          <button
+            class={`thumb-btn ${index === 0 ? "selected" : ""}`}
+            data-index={index}
+          >
+            <Image src={project.image} alt={`Thumbnail ${index}`} width={50} height={50} loading="eager" quality="max" />
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  :root {
+    --color-purple: #8a2be2;
+    --color-salmon: #ff8c69;
+    --color-white: #ffffff;
+    --color-black: #000000;
+  }
+
+  .slider-container {
+    width: 100%;
+    background: var(--color-dark);
+    color: var(--color-white);
+    font-family: sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .main-display {
+    position: relative;
+    height: 400px;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    text-decoration: none;
+    color: white;
+  }
+
+  .slide.active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 60px 20px 80px;
+    z-index: 2;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      transparent 100%
+    );
+  }
+
+  .info h2 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  .info p {
+    margin: 5px 0 0;
+    opacity: 0.8;
+  }
+
+  .controls-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+  }
+
+  .control-icon {
+    width: 46px;
+    height: 46px;
+    border: 2px solid var(--color-accent);
+    background: var(--color-dark);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0px;
+  }
+
+  .control-icon::before,
+  .control-icon::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 16px;
+    background-color: var(--color-accent);
+    transition: all 0.3s ease;
+  }
+
+  .control-icon::before {
+    transform: translateX(-4px);
+  }
+  .control-icon::after {
+    transform: translateX(4px);
+  }
+
+  .control-icon:hover {
+    border-color: var(--color-white);
+    box-shadow: 0 0 10px var(--color-purple);
+  }
+
+  .control-icon.is-paused::before {
+    height: 20px;
+    width: 20px;
+    background-color: var(--color-accent);
+    clip-path: polygon(20% 0%, 20% 100%, 100% 50%);
+    transform: translateX(2px);
+  }
+
+  .control-icon.is-paused::after {
+    opacity: 0;
+  }
+
+  .thumbnails {
+    display: flex;
+    gap: 10px;
+  }
+
+  .thumb-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+  }
+
+  .thumb-btn.selected {
+    border-color: var(--color-primary);
+    transform: scale(1.1);
+  }
+
+  .thumb-btn.selected img {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const setupSlider = () => {
+    let currentIndex: number = 0;
+    let isPaused: boolean = false;
+    let slideInterval: number | undefined;
+
+    const slides = document.querySelectorAll(".slide");
+    const thumbs = document.querySelectorAll(".thumb-btn");
+    const pauseBtn = document.getElementById("pause-btn");
+    const totalSlides = slides.length;
+
+    if (!pauseBtn || totalSlides === 0) return;
+
+    function showSlide(index: number) {
+      slides.forEach((s) => s.classList.remove("active"));
+      thumbs.forEach((t) => t.classList.remove("selected"));
+
+      slides[index].classList.add("active");
+      thumbs[index].classList.add("selected");
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      if (!isPaused) {
+        let next = (currentIndex + 1) % totalSlides;
+        showSlide(next);
+      }
+    }
+
+    function startSlideShow() {
+      if (slideInterval) clearInterval(slideInterval);
+      slideInterval = window.setInterval(nextSlide, 5000); // Slide cada 5 seg
+    }
+
+    function stopSlideShow() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = undefined;
+      }
+    }
+
+    startSlideShow();
+
+    thumbs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const htmlBtn = btn as HTMLButtonElement;
+        const index = parseInt(htmlBtn.getAttribute("data-index") || "0");
+        showSlide(index);
+        if (!isPaused) startSlideShow();
+      });
+    });
+
+    pauseBtn.addEventListener("click", () => {
+      isPaused = !isPaused;
+      pauseBtn.classList.toggle("is-paused", isPaused);
+      if (isPaused) stopSlideShow();
+      else startSlideShow();
+    });
+  };
+
+  setupSlider();
+  document.addEventListener("astro:after-swap", setupSlider); // Soporte para navegación Astro
+</script>
