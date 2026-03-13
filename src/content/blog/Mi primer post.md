@@ -12,7 +12,7 @@ slug: mi-primer-post-es-sueno-cumplido
 keywords:
     - IRL
 draft: false
-image: ../../assets/un-nuevo-proyecto.png
+image: ../../assets/miprimerpost.png
 ---
 Hola amig@s, quiero dar la bienvenida a mis seguidores y amigos a mi nuevo blog, un proyecto que me ha tomado un buen rato en terminar.
 
