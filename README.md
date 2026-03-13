@@ -1,46 +1,22 @@
-# Astro Starter Kit: Basics
+🌐 MisterDatos - Official Website
+Bienvenido al repositorio oficial de MisterDatos. Este proyecto es el hogar de mi sitio web personal, un espacio donde convergen el diseño cyberpunk/steampunk, mi contenido como streamer y mis proyectos de desarrollo.
 
-```sh
-npm create astro@latest -- --template basics
-```
+🚀 Sobre el Proyecto
+Este sitio está construido utilizando Astro, enfocado en la velocidad y la optimización de contenido. Sirve como centro de mando para mi comunidad, integrando:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+✍️ Blog Personal: Artículos sobre tecnología, desarrollo y vivencias.
 
-## 🚀 Project Structure
+🎮 Streaming: Información actualizada sobre mis directos en Twitch.
 
-Inside of your Astro project, you'll see the following folders and files:
+🎨 Proyectos: Espacio dedicado a PixVox y otras iniciativas creativas.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+🔗 Social Hub: Acceso rápido a todas mis redes sociales.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+🛠️ Tecnologías Utilizadas
+Framework: Astro
 
-## 🧞 Commands
+Lenguajes: JavaScript, HTML5, CSS3
 
-All commands are run from the root of the project, from a terminal:
+Despliegue: GitHub Pages
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Estilos: Diseño personalizado con paleta de colores Purple, Black, White & Salmon Pink.
