@@ -11,5 +11,10 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
     "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "@vite-pwa/astro": "^1.2.0",
+    "vite-plugin-pwa": "^0.19.8",
+    "workbox-window": "^7.4.0"
   }
 }
