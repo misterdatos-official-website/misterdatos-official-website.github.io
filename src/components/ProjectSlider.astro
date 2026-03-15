@@ -5,7 +5,7 @@ import misterdatosweb from '../assets/misterdatosweb.png';
 const projects = [
   {
     title: "Stream en Twitch",
-    subtitle: "Acompáñanos todos los viernes y sabados a las 9:00 PM",
+    subtitle: "Acompáñanos los viernes y sabados a las 9:00 PM Hora México",
     image: misterdatosweb,
     link: "https://www.twitch.tv/misterdatos",
   },
@@ -51,13 +51,6 @@ const projects = [
 </div>
 
 <style>
-  :root {
-    --color-purple: #8a2be2;
-    --color-salmon: #ff8c69;
-    --color-white: #ffffff;
-    --color-black: #000000;
-  }
-
   .slider-container {
     width: 100%;
     background: var(--color-dark);
@@ -242,7 +235,7 @@ const projects = [
 
     function startSlideShow() {
       if (slideInterval) clearInterval(slideInterval);
-      slideInterval = window.setInterval(nextSlide, 5000); // Slide cada 5 seg
+      slideInterval = window.setInterval(nextSlide, 5000);
     }
 
     function stopSlideShow() {
@@ -272,5 +265,5 @@ const projects = [
   };
 
   setupSlider();
-  document.addEventListener("astro:after-swap", setupSlider); // Soporte para navegación Astro
+  document.addEventListener("astro:after-swap", setupSlider);
 </script>

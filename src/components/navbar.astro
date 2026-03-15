@@ -21,9 +21,47 @@ import { Image } from "astro:assets";
         <li><a href="/blog">Blog</a></li>
         <li><a href="/socials">Redes</a></li>
     </ul>
+
+    <div class="nav-overlay"></div> 
 </nav>
 
 <style>
+    .nav-links {
+        position: fixed;
+        list-style-type: none;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 75vw;
+        max-width: 100%;
+        background: var(--color-dark); 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        transition: var(--transition);
+        z-index: 1000; 
+    }
+
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 950; 
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+    }
+
+    .menu-checkbox:checked ~ .nav-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
     .navbar {
         height: 80px;
         max-height: 80px;
@@ -46,23 +84,6 @@ import { Image } from "astro:assets";
         width: 150px;
         object-fit: contain;
         cursor: pointer;
-    }
-
-    .nav-links {
-        position: fixed;
-        list-style-type: none;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 75vw;
-        max-width: 100%;
-        background: var(--color-dark);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        transition: var(--transition);
     }
 
     .nav-links a {
@@ -119,5 +140,20 @@ import { Image } from "astro:assets";
             width: 50vw;
         }
     }
-
 </style>
+
+<script>
+  const menuCheckbox = document.getElementById('menu-toggle') as HTMLInputElement;
+  const overlay = document.querySelector('.nav-overlay');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const closeMenu = () => {
+    if (menuCheckbox) menuCheckbox.checked = false;
+  };
+
+  overlay?.addEventListener('click', closeMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
