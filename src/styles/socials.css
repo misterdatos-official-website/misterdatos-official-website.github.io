@@ -243,12 +243,3 @@ footer {
         font-size: 20px;
     }
 }
-
-@media (min-width: 1024px) {
-    /*for future use, currently not needed*/
-}
-
-
-@media (min-width: 1440px) {
-    /*for future use, currently not needed*/
-}
