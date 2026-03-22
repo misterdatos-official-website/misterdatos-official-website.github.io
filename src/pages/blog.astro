@@ -10,7 +10,19 @@ const sortedPosts = allPosts.sort(
 ---
 
 <Layout title="Publicaciones | MisterDatos">
-  <div class="blog-grid">
+  <div class="search-section">
+    <div class="search-wrapper">
+      <input 
+        type="text" 
+        id="blog-search" 
+        placeholder="Buscar publicaciones (ej: Super Mario, Zelda, Kirby...)" 
+        autocomplete="off"
+      />
+      <div id="search-info" class="search-info">Mostrando todas las publicaciones</div>
+    </div>
+  </div>
+
+  <div class="blog-grid" id="posts-container">
     {
       sortedPosts.map((post) => (
         <BlogCard
@@ -24,15 +36,106 @@ const sortedPosts = allPosts.sort(
         />
       ))
     }
+    
+    <div id="no-results" class="no-results" style="display: none;">
+      <p>No se encontraron publicaciones con ese nombre 😅</p>
+    </div>
   </div>
 </Layout>
 
 <style>
+  .search-section {
+    padding: 2rem 1rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-wrapper {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  #blog-search {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: rgba(28, 10, 27, 0.8);
+    border: 2px solid rgba(167, 139, 250, 0.2);
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #blog-search:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.2);
+  }
+
+  .search-info {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: #a29bfe;
+    opacity: 0.7;
+  }
+
   .blog-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
     padding: 2rem 1rem;
+    min-height: 400px;
+  }
+
+  .no-results {
+    color: #a29bfe;
+    font-size: 1.2rem;
+    padding: 3rem;
+    text-align: center;
   }
 </style>
+
+<script>
+  const initSearch = () => {
+    const searchInput = document.getElementById('blog-search') as HTMLInputElement;
+    const posts = document.querySelectorAll('.blog-card');
+    const infoText = document.getElementById('search-info');
+    const noResults = document.getElementById('no-results');
+
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+      let foundCount = 0;
+
+      posts.forEach((post) => {
+        const title = post.getAttribute('data-title') || "";
+        const desc = post.getAttribute('data-description') || "";
+
+        if (title.includes(query) || desc.includes(query)) {
+          (post as HTMLElement).style.display = 'block';
+          foundCount++;
+        } else {
+          (post as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (infoText) {
+        infoText.textContent = query 
+          ? `Resultados encontrados: ${foundCount}` 
+          : "Mostrando todas las publicaciones";
+      }
+
+      if (noResults) {
+        noResults.style.display = (foundCount === 0) ? 'block' : 'none';
+      }
+    });
+  };
+
+  initSearch();
+
+  document.addEventListener('astro:after-swap', initSearch);
+</script>

@@ -13,8 +13,12 @@ const recentPosts = allPosts
     <div class="blog-header">
         <h2 class="section-title">Últimas Novedades</h2>
         <div class="slider-controls">
-            <button id="prevBtn" class="control-btn" aria-label="Anterior">❮</button>
-            <button id="nextBtn" class="control-btn" aria-label="Siguiente">❯</button>
+            <button id="prevBtn" class="control-btn" aria-label="Anterior"
+                >❮</button
+            >
+            <button id="nextBtn" class="control-btn" aria-label="Siguiente"
+                >❯</button
+            >
         </div>
     </div>
 
@@ -37,11 +41,14 @@ const recentPosts = allPosts
                             )}
                             <div class="post-info">
                                 <time datetime={post.data.date.toISOString()}>
-                                    {post.data.date.toLocaleDateString("es-ES", {
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric",
-                                    })}
+                                    {post.data.date.toLocaleDateString(
+                                        "es-ES",
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        },
+                                    )}
                                 </time>
                                 <h3>{post.data.title}</h3>
                                 <p>{post.data.description}</p>
@@ -59,16 +66,16 @@ const recentPosts = allPosts
 </section>
 
 <script>
-    const slider = document.getElementById('slider');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    const slider = document.getElementById("slider");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
     if (slider && prevBtn && nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: 350, behavior: 'smooth' });
+        nextBtn.addEventListener("click", () => {
+            slider.scrollBy({ left: 350, behavior: "smooth" });
         });
-        prevBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: -350, behavior: 'smooth' });
+        prevBtn.addEventListener("click", () => {
+            slider.scrollBy({ left: -350, behavior: "smooth" });
         });
     }
 </script>
@@ -92,7 +99,7 @@ const recentPosts = allPosts
     .section-title {
         font-size: 1.25rem;
         margin: 0;
-        color: #a78bfa;
+        color: #ffffff;
     }
 
     .slider-controls {
@@ -108,6 +115,8 @@ const recentPosts = allPosts
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
     }
 
     .control-btn:hover {
@@ -137,6 +146,8 @@ const recentPosts = allPosts
         text-decoration: none;
         flex: 0 0 280px;
         display: block;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
     }
 
     .post-card {
@@ -144,13 +155,23 @@ const recentPosts = allPosts
         border-radius: 15px;
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: transform 0.3s ease;
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease,
+            filter 0.2s ease,
+            box-shadow 0.3s ease;
         height: 100%;
+    }
+
+    .post-card:active {
+        transform: scale(0.97);
+        border-color: #a78bfa;
+        filter: brightness(0.8);
+        box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
     }
 
     .post-card:hover {
         transform: translateY(-5px);
-        border-color: #8b5cf6;
     }
 
     .post-image img {
@@ -185,6 +206,7 @@ const recentPosts = allPosts
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+        vertical-align: middle;
         overflow: hidden;
         color: #ddd;
     }
@@ -192,6 +214,7 @@ const recentPosts = allPosts
     .view-all-container {
         display: flex;
         justify-content: center;
+        padding-top: 1rem;
     }
 
     .btn-all {
@@ -202,6 +225,13 @@ const recentPosts = allPosts
         text-decoration: none;
         font-weight: bold;
         transition: all 0.3s ease;
+        /* NUEVO: Quitar azul en el botón de ver todo */
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-all:active {
+        transform: scale(0.95);
+        background: rgba(139, 92, 246, 0.2);
     }
 
     @media (min-width: 768px) {

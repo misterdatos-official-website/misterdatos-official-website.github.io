@@ -14,7 +14,12 @@ interface Props {
 const { title, description, url, date, image, category, slug } = Astro.props;
 ---
 
-<article class="blog-card" data-post-slug={slug}>
+<article 
+  class="blog-card" 
+  data-title={title.toLowerCase()} 
+  data-description={description.toLowerCase()}
+  data-post-slug={slug}
+>
   <a href={url} class="card-content">
     {
       image && (
@@ -39,11 +44,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
     background: rgba(28, 10, 27, 0.6);
     border-radius: 16px;
     overflow: hidden;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      border-color 0.3s ease,
-      filter 0.2s ease;
+    transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
     box-sizing: border-box;
@@ -59,7 +60,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
   .blog-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(145, 70, 255, 0.2);
-    border-color: var(--color-accent);
+    border-color: #a78bfa;
   }
 
   .card-content {
@@ -75,7 +76,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
   .image-wrapper {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 200px;
     overflow: hidden;
   }
 
@@ -95,7 +96,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
     bottom: 1rem;
     right: 1rem;
     background: #ff8c00;
-    color: var(--color-white);
+    color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 6px;
     font-weight: 800;
@@ -111,7 +112,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
     color: #a29bfe;
     font-size: 0.85rem;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .post-title {
@@ -132,13 +133,5 @@ const { title, description, url, date, image, category, slug } = Astro.props;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  .read-more i {
-    transition: transform 0.3s ease;
-  }
-
-  .blog-card:hover .read-more i {
-    transform: translateX(5px);
   }
 </style>
