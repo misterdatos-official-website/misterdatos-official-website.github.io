@@ -1,6 +1,6 @@
 {
   "frontMatter.framework.id": "astro",
-  "frontMatter.framework.startCommand": "npm run dev",
+  "frontMatter.framework.startCommand": "npm run serve",
   "frontMatter.preview.host": "http://localhost:4321",
   "frontMatter.content.publicFolder": {
     "path": "src/assets",
@@ -59,9 +59,15 @@
           "title": "image",
           "name": "image",
           "type": "image"
+        },
+        {
+          "title": "youtubeId",
+          "name": "youtubeId",
+          "type": "string"
         }
       ]
     }
   ],
-  "frontMatter.git.enabled": true
+  "frontMatter.git.enabled": true,
+  "frontMatter.taxonomy.keywordsField": "keywords"
 }

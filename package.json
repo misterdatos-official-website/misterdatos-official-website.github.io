@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "serve": "npm run build && npm run preview"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
