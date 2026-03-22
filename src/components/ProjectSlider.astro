@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import misterdatosweb from '../assets/misterdatosweb.png';
-import apagadoweb from '../assets/apagadoweb.png';
+import { Image } from "astro:assets";
+import misterdatosweb from "../assets/misterdatosweb.png";
+import apagadoweb from "../assets/apagadoweb.png";
 
 const projects = [
   {
@@ -13,7 +13,8 @@ const projects = [
 
   {
     title: "Estreno de Apagado",
-    subtitle: "Un cortometraje animado en el que soy actor de doblaje, se estrena el dia 7 de abril del 2026.",
+    subtitle:
+      "Un cortometraje animado en el que soy actor de doblaje, se estrena el dia 7 de abril del 2026.",
     image: apagadoweb,
     link: "https://youtu.be/hczgwp_z7KA?si=t8JEgb_2Pxq5KNuo",
   },
@@ -25,11 +26,20 @@ const projects = [
     {
       projects.map((project, index) => (
         <a
-          href={project.link} target="_blank" rel="noopener"
+          href={project.link}
+          target="_blank"
+          rel="noopener"
           class={`slide ${index === 0 ? "active" : ""}`}
           data-index={index}
         >
-          <Image src={project.image} alt={project.title} width={800} height={400} loading="eager" quality="max" />
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={800}
+            height={400}
+            loading="eager"
+            quality="max"
+          />
           <div class="info">
             <h2>{project.title}</h2>
             <p>{project.subtitle}</p>
@@ -50,7 +60,14 @@ const projects = [
             class={`thumb-btn ${index === 0 ? "selected" : ""}`}
             data-index={index}
           >
-            <Image src={project.image} alt={`Thumbnail ${index}`} width={50} height={50} loading="eager" quality="max" />
+            <Image
+              src={project.image}
+              alt={`Thumbnail ${index}`}
+              width={50}
+              height={50}
+              loading="eager"
+              quality="max"
+            />
           </button>
         ))
       }
@@ -66,6 +83,8 @@ const projects = [
     font-family: sans-serif;
     overflow: hidden;
     position: relative;
+    /* Evita el resaltado azul en todo el contenedor */
+    -webkit-tap-highlight-color: transparent;
   }
 
   .main-display {
@@ -80,11 +99,18 @@ const projects = [
     transition: opacity 0.6s ease-in-out;
     text-decoration: none;
     color: white;
+    outline: none;
   }
 
   .slide.active {
     opacity: 1;
     z-index: 1;
+  }
+
+  /* Feedback visual al presionar el slide principal */
+  .slide:active {
+    opacity: 0.9;
+    filter: brightness(0.8);
   }
 
   .slide img {
@@ -143,6 +169,14 @@ const projects = [
     position: relative;
     transition: all 0.3s ease;
     padding: 0px;
+    outline: none;
+  }
+
+  /* Efecto morado al presionar el botón de pausa */
+  .control-icon:active {
+    transform: scale(0.9);
+    border-color: #a78bfa;
+    box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
   }
 
   .control-icon::before,
@@ -193,6 +227,14 @@ const projects = [
     cursor: pointer;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.1);
+    padding: 0;
+    outline: none;
+  }
+
+  /* Borde morado al presionar miniaturas */
+  .thumb-btn:active {
+    border-color: #a78bfa;
+    transform: scale(0.95);
   }
 
   .thumb-btn img {
