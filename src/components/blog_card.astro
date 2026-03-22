@@ -42,16 +42,18 @@ const { title, description, url, date, image, category, slug } = Astro.props;
     transition:
       transform 0.3s ease,
       box-shadow 0.3s ease,
-      border-color 0.3s ease;
+      border-color 0.3s ease,
+      filter 0.2s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
 
   .blog-card:active {
-    border-color: #a78bfa; 
+    border-color: #a78bfa;
     transform: scale(0.98);
     box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
+    filter: brightness(0.8);
   }
 
   .blog-card:hover {
