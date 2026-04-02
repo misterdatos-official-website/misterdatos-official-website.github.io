@@ -1,6 +1,6 @@
 {
   "frontMatter.framework.id": "astro",
-  "frontMatter.framework.startCommand": "npm run serve",
+  "frontMatter.framework.startCommand": "npm run dev",
   "frontMatter.preview.host": "http://localhost:4321",
   "frontMatter.content.publicFolder": {
     "path": "src/assets",

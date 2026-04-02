@@ -8,6 +8,10 @@ export default defineConfig({
       mode: 'production',
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
+      devOptions: {
+        enabled: false,
+        type: 'module'
+      },
       manifest: {
         name: 'MisterDatos App',
         short_name: 'MisterDatos',

@@ -27,7 +27,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <Layout title={entry.data.title}>
   <main class="post-container">
-    <div class="glow-bg"></div>
 
     <article class="post-content">
       <header class="post-header">
@@ -122,13 +121,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   if (commentsSection) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // Si el usuario está a menos de 300px de los comentarios
+
         if (entry.isIntersecting) {
           loadDisqus();
-          observer.disconnect(); // Dejar de observar una vez cargado
+          observer.disconnect();
         }
       });
-    }, { rootMargin: '300px' }); // Margen de 300px para que cargue justo antes de llegar
+    }, { rootMargin: '300px' });
 
     observer.observe(commentsSection);
   }
@@ -149,43 +148,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <style>
   .post-container {
     position: relative;
-    max-width: 800px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     min-height: 100vh;
-  }
-
-  .glow-bg {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      circle at top,
-      var(--color-primary) 0%,
-      transparent 50%
-    );
-    filter: blur(100px);
-    opacity: 0.1;
-    z-index: -1;
   }
 
   .post-title {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     line-height: 1.1;
-    margin: 1rem 0 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     color: var(--color-white);
     font-family: var(--font-main);
   }
 
   .post-meta {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     color: #8892b0;
-    font-size: 0.9rem;
-    margin-bottom: 3rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
     opacity: 0.8;
   }
 
@@ -196,8 +178,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   }
 
   .image-wrapper {
-    margin: 3rem 0;
-    width: 100%;
+    margin: 1rem;
   }
 
   .featured-image {
@@ -211,7 +192,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: #cbd5e1;
     font-size: 1.25rem;
     line-height: 1.8;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
   .prose :global(h2) {
@@ -245,8 +227,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: var(--color-white);
     font-family: var(--font-main);
     font-size: 1.75rem;
-    margin-top: 4rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .video-responsive {
@@ -288,7 +270,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   @media (min-width: 768px) {
     .post-container {
-      padding-top: 3rem;
+      padding-top: 1rem;
     }
   }
 </style>
