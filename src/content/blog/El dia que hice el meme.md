@@ -23,6 +23,6 @@ A día de hoy, el éxito del meme habla por sí solo:
 
 - Shorts: Más de 103K visualizaciones.
 
-Pero los números no se quedan ahí. El video ha cobrado vida propia, siendo resubido y compartido en [Facebook](https://www.facebook.com/share/v/1CKuWZys8b/), [X (Twitter)](https://x.com/Juancho97dls/status/1657187097390858243?s=20) y [Reddit](https://www.reddit.com/r/PokemonUnite/comments/13fk79z/i_dont_know_what_theyre_saying_but_i_know_its_art/). Lo más sorprendente ha sido ver cómo cruzó la barrera del idioma, llegando a ser reconocido por las comunidades de habla inglesa y brasileña.
+Pero los números no se quedan ahí. El video ha cobrado vida propia, siendo resubido y compartido en [Facebook](https://www.facebook.com/share/v/1CKuWZys8b/), [X (Twitter)](https://x.com/Juancho97dls/status/1657187097390858243?s=20) y [Reddit](https://www.reddit.com/r/PokemonUnite/comments/13fk79z/i_dont_know_what_theyre_saying_but_i_know_its_art/). Lo más sorprendente ha sido ver cómo cruzó la barrera del idioma, llegando a ser reconocido por las comunidades de habla [inglesa](https://x.com/JBahen/status/1663594831229100033?s=20) y brasileña.
 
 Agradezco de corazón a todas las personas que siguen disfrutando del meme y que, incluso ahora en pleno 2026, lo siguen compartiendo.
