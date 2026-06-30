@@ -41,19 +41,19 @@ const { title, description, url, date, image, category, slug } = Astro.props;
 
 <style>
   .blog-card {
-    background: rgba(28, 10, 27, 0.6);
+    background: #221425;
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #ffffff70;
     width: 100%;
     box-sizing: border-box;
   }
 
   .blog-card:active {
-    border-color: #a78bfa;
+    border-color: #a588ff;
     transform: scale(0.98);
-    box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
+    box-shadow: 0 0 15px #ffffff70;
     filter: brightness(0.8);
   }
 
@@ -64,7 +64,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
   .card-content {
     position: relative;
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     -webkit-tap-highlight-color: transparent;
@@ -107,7 +107,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
   }
 
   .post-date {
-    color: #a29bfe;
+    color: #a588ff;
     font-size: 0.85rem;
     display: block;
     margin-bottom: 0.5rem;
@@ -120,7 +120,7 @@ const { title, description, url, date, image, category, slug } = Astro.props;
   }
 
   .post-description {
-    color: #cccccc;
+    color: #ffffff;
     font-size: 1rem;
     margin-bottom: 1rem;
     line-height: 1.5;

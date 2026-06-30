@@ -16,9 +16,9 @@ const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 		</main>
 		<style is:global>
 			:root {
-				--color-primary: #541f52;
-				--color-dark: #1c0a1b;
-				--color-accent: #9146ff;
+				--color-primary: #a588ff;
+				--color-dark: #341B39;
+				--color-accent: #a588ff;
 				--color-white: #ffffff;
 				--font-main: "Michroma", sans-serif;
 				--transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -47,24 +47,5 @@ const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 				padding: 20px;
 			}
 		</style>
-		<script>
-			// Registrar el Service Worker para PWA
-			if ("serviceWorker" in navigator) {
-				navigator.serviceWorker
-					.register("/sw.js")
-					.then((registration) => {
-						console.log(
-							"✅ Service Worker registrado:",
-							registration,
-						);
-					})
-					.catch((error) => {
-						console.log(
-							"❌ Error registrando Service Worker:",
-							error,
-						);
-					});
-			}
-		</script>
 	</body>
 </html>

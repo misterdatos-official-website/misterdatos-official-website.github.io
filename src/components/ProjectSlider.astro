@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import misterdatosweb from "../assets/misterdatosweb.png";
-import apagadoweb from "../assets/apagadoweb.png";
 
 const projects = [
   {
@@ -11,13 +10,6 @@ const projects = [
     link: "https://www.twitch.tv/misterdatos",
   },
 
-  {
-    title: "Estreno de Apagado",
-    subtitle:
-      "Un cortometraje animado en el que soy actor de doblaje, se estrena el dia 7 de abril del 2026.",
-    image: apagadoweb,
-    link: "https://youtu.be/hczgwp_z7KA?si=t8JEgb_2Pxq5KNuo",
-  },
 ];
 ---
 
@@ -97,7 +89,7 @@ const projects = [
     opacity: 0;
     transition: opacity 0.6s ease-in-out;
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     outline: none;
   }
 
@@ -126,7 +118,7 @@ const projects = [
     z-index: 2;
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.9) 0%,
+      #000000e0 0%,
       transparent 100%
     );
   }
@@ -150,7 +142,7 @@ const projects = [
     bottom: 0;
     width: 100%;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.3);
+    background: #00000050;
     backdrop-filter: blur(5px);
   }
 
@@ -172,8 +164,8 @@ const projects = [
 
   .control-icon:active {
     transform: scale(0.9);
-    border-color: #a78bfa;
-    box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+    border-color: #a588ff;
+    box-shadow: 0 0 10px #a588ff;
   }
 
   .control-icon::before,
@@ -223,14 +215,14 @@ const projects = [
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
+    background: #ffffff25;
     padding: 0;
     outline: none;
   }
 
   /* Borde morado al presionar miniaturas */
   .thumb-btn:active {
-    border-color: #a78bfa;
+    border-color: #a588ff;
     transform: scale(0.95);
   }
 
