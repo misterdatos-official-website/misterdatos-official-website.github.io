@@ -3,7 +3,7 @@ title: Creé el meme más viral y absurdo de Pokémon UNITE
 slug: cree-el-meme-mas-viral-absurdo-de-pokemon-unite
 draft: false
 date: 2026-04-02T21:34:17.109Z
-description: Nunca pense hace rel meme mas absurdo y popular de todo un Fandom.
+description: Nunca pense hacer el meme mas absurdo y popular de todo un Fandom.
 tags:
     - Pokémon UNITE
     - Blog
