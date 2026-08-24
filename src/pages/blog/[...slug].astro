@@ -21,8 +21,6 @@ const publishDate = entry.data.date?.toLocaleDateString("es-ES", {
 });
 
 const youtubeVideoId = entry.data.youtubeId;
-const disqusShortname = "misterdatos";
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <Layout title={entry.data.title}>
@@ -107,43 +105,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         )
       }
 
-      <section class="comments-section">
-        <h2 class="section-title">Comentarios</h2>
-        <div id="disqus_thread"></div>
-      </section>
     </article>
   </main>
 </Layout>
-
-<script is:inline define:vars={{ disqusShortname, url: canonicalURL.href, id: entry.slug }}>
-  const commentsSection = document.getElementById('disqus_thread');
-
-  if (commentsSection) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-          loadDisqus();
-          observer.disconnect();
-        }
-      });
-    }, { rootMargin: '300px' });
-
-    observer.observe(commentsSection);
-  }
-
-  function loadDisqus() {
-    window.disqus_config = function () {
-      this.page.url = url;
-      this.page.identifier = id;
-    };
-
-    var d = document, s = d.createElement('script');
-    s.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  }
-</script>
 
 <style>
   .post-container {

@@ -1,1 +1,20 @@
-{"users":{"amd":{"downloads":{"pagina web":{"misterdatos-official-website.github.io":{"src":{"assets":{}},"public":{}}}}}},"src":{"assets":{}},"public":{}}
+{
+  "public": {},
+  "src": {
+    "assets": {}
+  },
+  "users": {
+    "amd": {
+      "downloads": {
+        "pagina web": {
+          "misterdatos-official-website.github.io": {
+            "public": {},
+            "src": {
+              "assets": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
