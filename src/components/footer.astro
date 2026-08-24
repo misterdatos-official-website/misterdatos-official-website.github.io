@@ -12,12 +12,13 @@ const {
 
 <footer class={className} id="redes">
     <div class="social-container">
-        <a
-            href="https://www.youtube.com/@misterdatos_oficial"
+        <button
+            type="button"
+            id="youtube-dialog-button"
             class="social-icon youtube"
-            target="_blank"
-            rel="noopener"
             aria-label="YouTube"
+            aria-haspopup="dialog"
+            aria-controls="youtube-dialog"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +31,7 @@ const {
                     d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
                 ></path>
             </svg>
-        </a>
+        </button>
         <a
             href="https://www.twitch.tv/misterdatos/about"
             class="social-icon twitch"
@@ -130,8 +131,53 @@ const {
             </svg>
         </a>
     </div>
+    <dialog id="youtube-dialog" aria-labelledby="youtube-dialog-title">
+        <div class="dialog-header">
+            <h2 id="youtube-dialog-title">Mis canales de YouTube</h2>
+            <button type="button" class="dialog-close" aria-label="Cerrar diálogo">
+                &times;
+            </button>
+        </div>
+        <div class="youtube-channels">
+            <a
+                href="https://www.youtube.com/@misterdatos_official"
+                target="_blank"
+                rel="noopener"
+            >
+                @misterdatos_official
+            </a>
+            <a
+                href="https://www.youtube.com/@misterdatos_oficial"
+                target="_blank"
+                rel="noopener"
+            >
+                @misterdatos_oficial
+            </a>
+        </div>
+    </dialog>
     <p>{copyrightText}</p>
 </footer>
+
+<script>
+    const youtubeButton = document.getElementById("youtube-dialog-button");
+    const youtubeDialog = document.getElementById("youtube-dialog");
+    const dialogCloseButton = youtubeDialog?.querySelector(".dialog-close");
+
+    if (
+        youtubeButton instanceof HTMLButtonElement &&
+        youtubeDialog instanceof HTMLDialogElement &&
+        dialogCloseButton instanceof HTMLButtonElement
+    ) {
+        youtubeButton.addEventListener("click", () => youtubeDialog.showModal());
+        dialogCloseButton.addEventListener("click", () => youtubeDialog.close());
+        youtubeDialog.addEventListener("click", (event) => {
+            if (event.target === youtubeDialog) {
+                youtubeDialog.close();
+            }
+        });
+        youtubeDialog.addEventListener("close", () => youtubeButton.focus());
+    }
+</script>
 
 <style>
     .Footer {
@@ -159,6 +205,8 @@ const {
         color: #ffffff;
         transition: all 0.3s ease;
         text-decoration: none;
+        border: 0;
+        cursor: pointer;
     }
 
     .social-icon:hover {
@@ -191,6 +239,72 @@ const {
     }
     .discord {
         background-color: #5865f2;
+    }
+
+    dialog {
+        width: min(90vw, 420px);
+        padding: 24px;
+        color: #ffffff;
+        background: #221425;
+        border: 1px solid #a588ff;
+        border-radius: 12px;
+        box-shadow: 0 18px 60px rgb(0 0 0 / 45%);
+    }
+
+    dialog::backdrop {
+        background: rgb(10 5 15 / 78%);
+    }
+
+    .dialog-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .dialog-header h2 {
+        font-size: 1rem;
+        color: #ffffff;
+    }
+
+    .dialog-close {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        place-items: center;
+        color: #ffffff;
+        font-size: 1.5rem;
+        line-height: 1;
+        background: transparent;
+        border: 1px solid rgb(255 255 255 / 35%);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .dialog-close:hover {
+        background: rgb(255 255 255 / 12%);
+    }
+
+    .youtube-channels {
+        display: grid;
+        gap: 12px;
+    }
+
+    .youtube-channels a {
+        display: block;
+        padding: 14px 16px;
+        color: #ffffff;
+        background: #ff0000;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .youtube-channels a:hover {
+        filter: brightness(1.2);
+        transform: translateX(4px);
     }
 
     .Footer p {
