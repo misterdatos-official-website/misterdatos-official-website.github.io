@@ -54,12 +54,13 @@ const {
                 ></path>
             </svg>
         </a>
-        <a
-            href="https://www.tiktok.com/@misterdatos"
+        <button
+            type="button"
+            id="tiktok-dialog-button"
             class="social-icon tiktok"
-            target="_blank"
-            rel="noopener"
             aria-label="TikTok"
+            aria-haspopup="dialog"
+            aria-controls="tiktok-dialog"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +73,7 @@ const {
                     d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
                 ></path>
             </svg>
-        </a>
+        </button>
         <a
             href="https://www.instagram.com/misterdatos_oficial/"
             class="social-icon instagram"
@@ -155,6 +156,30 @@ const {
             </a>
         </div>
     </dialog>
+    <dialog id="tiktok-dialog" aria-labelledby="tiktok-dialog-title">
+        <div class="dialog-header">
+            <h2 id="tiktok-dialog-title">Cuentas de TikTok</h2>
+            <button type="button" class="dialog-close" aria-label="Cerrar diálogo">
+                &times;
+            </button>
+        </div>
+        <div class="tiktok-accounts">
+            <a
+                href="https://www.tiktok.com/@misterdatos"
+                target="_blank"
+                rel="noopener"
+            >
+                MisterDatos
+            </a>
+            <a
+                href="https://www.tiktok.com/@misterdatos_music"
+                target="_blank"
+                rel="noopener"
+            >
+                MisterDatos Music
+            </a>
+        </div>
+    </dialog>
     <p>{copyrightText}</p>
 </footer>
 
@@ -162,6 +187,9 @@ const {
     const youtubeButton = document.getElementById("youtube-dialog-button");
     const youtubeDialog = document.getElementById("youtube-dialog");
     const dialogCloseButton = youtubeDialog?.querySelector(".dialog-close");
+    const tiktokButton = document.getElementById("tiktok-dialog-button");
+    const tiktokDialog = document.getElementById("tiktok-dialog");
+    const tiktokCloseButton = tiktokDialog?.querySelector(".dialog-close");
 
     if (
         youtubeButton instanceof HTMLButtonElement &&
@@ -176,6 +204,21 @@ const {
             }
         });
         youtubeDialog.addEventListener("close", () => youtubeButton.focus());
+    }
+
+    if (
+        tiktokButton instanceof HTMLButtonElement &&
+        tiktokDialog instanceof HTMLDialogElement &&
+        tiktokCloseButton instanceof HTMLButtonElement
+    ) {
+        tiktokButton.addEventListener("click", () => tiktokDialog.showModal());
+        tiktokCloseButton.addEventListener("click", () => tiktokDialog.close());
+        tiktokDialog.addEventListener("click", (event) => {
+            if (event.target === tiktokDialog) {
+                tiktokDialog.close();
+            }
+        });
+        tiktokDialog.addEventListener("close", () => tiktokButton.focus());
     }
 </script>
 
@@ -304,6 +347,27 @@ const {
     }
 
     .youtube-channels a:hover {
+        filter: brightness(1.2);
+        transform: translateX(4px);
+    }
+
+    .tiktok-accounts {
+        display: grid;
+        gap: 12px;
+    }
+
+    .tiktok-accounts a {
+        display: block;
+        padding: 14px 16px;
+        color: #ffffff;
+        background: #010101;
+        border: 1px solid #444;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .tiktok-accounts a:hover {
         filter: brightness(1.2);
         transform: translateX(4px);
     }
