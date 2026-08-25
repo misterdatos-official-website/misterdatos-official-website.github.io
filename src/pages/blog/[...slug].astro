@@ -160,6 +160,17 @@ const youtubeVideoId = entry.data.youtubeId;
     margin-top: 1rem;
   }
 
+  .prose :global(a) {
+    color: #f3a6d8;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .prose :global(a:hover),
+  .prose :global(a:focus-visible) {
+    color: #c9a7ff; /* morado claro */
+  }
+
   .prose :global(h2) {
     color: var(--color-accent);
     font-family: var(--font-main);
