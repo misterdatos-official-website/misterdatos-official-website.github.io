@@ -30,6 +30,9 @@ const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 				--color-dark: #341B39;
 				--color-accent: #a588ff;
 				--color-white: #ffffff;
+				--surface-page: #1b1220;
+				--surface-panel: #24172a;
+				--surface-raised: #2d1d35;
 				--font-main: "Michroma", sans-serif;
 				--transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 			}
@@ -42,9 +45,10 @@ const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 				scroll-behavior: smooth;
 				overflow-y: scroll;
 				overflow-x: hidden;
+				scrollbar-gutter: stable;
 			}
 			body {
-				background-color: var(--color-dark);
+				background-color: var(--surface-page);
 				font-family: var(--font-main);
 				color: var(--color-white);
 				overflow-x: hidden;

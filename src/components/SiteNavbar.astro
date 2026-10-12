@@ -65,7 +65,7 @@ const currentPath = Astro.url.pathname;
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: rgb(34 20 37 / 88%);
+    background: rgb(36 23 42 / 92%);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     content: "";
@@ -109,9 +109,10 @@ const currentPath = Astro.url.pathname;
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background: #221425;
+    background: var(--surface-raised);
     border-left: 1px solid rgb(165 136 255 / 20%);
     box-shadow: -20px 24px 50px rgb(0 0 0 / 24%);
+    overscroll-behavior: contain;
     transform: translateX(105%);
     visibility: hidden;
     transition:
@@ -186,6 +187,7 @@ const currentPath = Astro.url.pathname;
     z-index: 1;
     border: 0;
     background: rgb(10 5 15 / 65%);
+    overscroll-behavior: contain;
     opacity: 0;
     visibility: hidden;
     transition:
@@ -288,9 +290,24 @@ const currentPath = Astro.url.pathname;
   const menuToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
   const navBackdrop = document.querySelector<HTMLButtonElement>(".nav-backdrop");
   const navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-links a");
+  let previousHtmlOverflowY: string | null = null;
+  let previousBodyOverflow: string | null = null;
 
   const setMenuOpen = (isOpen: boolean) => {
     if (!navbar || !menuToggle) return;
+
+    const wasOpen = navbar.dataset.menuOpen === "true";
+    if (isOpen && !wasOpen) {
+      previousHtmlOverflowY = document.documentElement.style.overflowY;
+      previousBodyOverflow = document.body.style.overflow;
+      document.documentElement.style.overflowY = "hidden";
+      document.body.style.overflow = "hidden";
+    } else if (!isOpen && wasOpen) {
+      document.documentElement.style.overflowY = previousHtmlOverflowY ?? "";
+      document.body.style.overflow = previousBodyOverflow ?? "";
+      previousHtmlOverflowY = null;
+      previousBodyOverflow = null;
+    }
 
     navbar.dataset.menuOpen = String(isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));

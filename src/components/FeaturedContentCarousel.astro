@@ -80,8 +80,9 @@ const projects = [
 
 <style>
   .slider-container {
+    --controls-height: 5rem;
     width: 100%;
-    background: var(--color-dark);
+    background: var(--surface-page);
     color: var(--color-white);
     font-family: sans-serif;
     overflow: hidden;
@@ -122,10 +123,10 @@ const projects = [
 
   .info {
     position: absolute;
-    bottom: 0;
+    bottom: var(--controls-height);
     left: 0;
     right: 0;
-    padding: 60px 20px 80px;
+    padding: 60px 20px 20px;
     z-index: 2;
     background: linear-gradient(
       to top,
@@ -145,6 +146,7 @@ const projects = [
 
   .controls-overlay {
     display: flex;
+    min-height: var(--controls-height);
     align-items: center;
     justify-content: center;
     gap: 15px;
@@ -153,7 +155,7 @@ const projects = [
     bottom: 0;
     width: 100%;
     z-index: 10;
-    background: #00000050;
+    background: #000000e0;
     backdrop-filter: blur(5px);
   }
 
@@ -161,7 +163,7 @@ const projects = [
     width: 46px;
     height: 46px;
     border: 2px solid var(--color-accent);
-    background: var(--color-dark);
+    background: var(--surface-raised);
     cursor: pointer;
     border-radius: 50%;
     display: flex;

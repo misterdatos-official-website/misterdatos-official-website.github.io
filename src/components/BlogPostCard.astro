@@ -64,7 +64,7 @@ const formattedDate = date.toLocaleDateString("es-ES", {
     overflow: hidden;
     border: 1px solid rgb(165 136 255 / 28%);
     border-radius: 1.25rem;
-    background: #221425;
+    background: var(--surface-raised);
     box-shadow: 0 10px 30px rgb(0 0 0 / 14%);
     transition:
       transform 220ms ease,
@@ -97,13 +97,13 @@ const formattedDate = date.toLocaleDateString("es-ES", {
     position: relative;
     overflow: hidden;
     aspect-ratio: 16 / 9;
-    background: #341b39;
+    background: var(--surface-panel);
   }
 
   .image-wrapper::after {
     position: absolute;
     inset: 45% 0 0;
-    background: linear-gradient(transparent, rgb(34 20 37 / 25%));
+    background: linear-gradient(transparent, rgb(36 23 42 / 35%));
     content: "";
     pointer-events: none;
   }
