@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import BlogCard from "../components/blog_card.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import BlogPostCard from "../components/BlogPostCard.astro";
 
 const allPosts = await getCollection("blog");
 const sortedPosts = allPosts.sort(
@@ -9,23 +9,33 @@ const sortedPosts = allPosts.sort(
 );
 ---
 
-<Layout title="Publicaciones | MisterDatos">
+<SiteLayout title="Publicaciones | MisterDatos">
   <div class="search-section">
-    <div class="search-wrapper">
-      <input 
-        type="text" 
-        id="blog-search" 
-        placeholder="Buscar publicaciones (ej: Super Mario, Zelda, Kirby...)" 
-        autocomplete="off"
-      />
-      <div id="search-info" class="search-info">Mostrando todas las publicaciones</div>
+    <div class="search-area">
+      <div class="search-wrapper" role="search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8" />
+          <path d="m16 16 4.2 4.2" />
+        </svg>
+        <label class="visually-hidden" for="blog-search">Buscar publicaciones</label>
+        <input
+          type="search"
+          id="blog-search"
+          placeholder="Ej. Pokémon, Zelda, Kirby..."
+          autocomplete="off"
+          aria-describedby="search-info"
+        />
+      </div>
+      <div id="search-info" class="search-info" aria-live="polite">
+        Mostrando todas las publicaciones
+      </div>
     </div>
   </div>
 
   <div class="blog-grid" id="posts-container">
     {
       sortedPosts.map((post) => (
-        <BlogCard
+        <BlogPostCard
           title={post.data.title}
           description={post.data.description ?? ""}
           date={post.data.date}
@@ -41,7 +51,7 @@ const sortedPosts = allPosts.sort(
       <p>No se encontraron publicaciones con ese nombre 😅</p>
     </div>
   </div>
-</Layout>
+</SiteLayout>
 
 <style>
   .search-section {
@@ -50,46 +60,101 @@ const sortedPosts = allPosts.sort(
     justify-content: center;
   }
 
+  .search-area {
+    width: min(100%, 560px);
+  }
+
   .search-wrapper {
+    position: relative;
     width: 100%;
-    max-width: 600px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(165 136 255 / 42%);
+    border-radius: 999px;
+    background: rgb(34 20 37 / 75%);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .search-wrapper:focus-within {
+    border-color: #a588ff;
+    box-shadow: 0 0 0 3px rgb(165 136 255 / 12%);
+  }
+
+  .search-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: 0 0 auto;
+    margin-left: 1.1rem;
+    fill: none;
+    stroke: #c6b5ff;
+    stroke-linecap: round;
+    stroke-width: 1.8;
   }
 
   #blog-search {
     width: 100%;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    background: #341B39;
-    border: 2px solid #a588ff;
-    color: #ffffff;
-    font-size: 1.1rem;
-    outline: none;
-    transition: all 0.3s ease;
+    min-width: 0;
+    min-height: 3.25rem;
+    padding: 0.75rem 1rem;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #fff;
+    font: 400 0.95rem/1.4 system-ui, sans-serif;
     -webkit-tap-highlight-color: transparent;
   }
 
-  #blog-search:focus {
-    border-color: #a588ff;
+  #blog-search::placeholder {
+    color: rgb(255 255 255 / 48%);
+  }
+
+  #blog-search::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
   }
 
   .search-info {
-    margin-top: 0.8rem;
-    font-size: 0.85rem;
-    color: #ffffff;
-    opacity: 0.7;
+    min-height: 1.25rem;
+    margin-top: 0.65rem;
+    padding-left: 1rem;
+    color: rgb(255 255 255 / 58%);
+    font: 400 0.78rem/1.5 system-ui, sans-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .search-wrapper {
+      transition: none;
+    }
   }
 
   .blog-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 380px));
+    justify-content: center;
+    align-items: stretch;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    width: min(100%, 1320px);
+    box-sizing: border-box;
+    margin-inline: auto;
     padding: 2rem 1rem;
     min-height: 400px;
   }
 
   .no-results {
+    grid-column: 1 / -1;
     color: #ffffff;
     font-size: 1.2rem;
     padding: 3rem;

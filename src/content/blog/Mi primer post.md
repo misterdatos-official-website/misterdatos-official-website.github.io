@@ -1,5 +1,5 @@
 ---
-title: El primer post en el blog es un sueño cumplido...
+title: El primer post en el blog es un sueño cumplido.
 date: 2026-03-20T09:41:51.108Z
 description: Quiero contarte que, este blog es importante para mi.
 tags: []

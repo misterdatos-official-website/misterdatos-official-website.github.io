@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import misterdatosweb from "../assets/misterdatosweb.png";
+import misterdatosweb from "../assets/misterdatosweb.webp";
+import misterdatosweb2 from "../assets/misterdatosweb2.webp";
 
 const projects = [
   {
@@ -9,7 +10,12 @@ const projects = [
     image: misterdatosweb,
     link: "https://www.twitch.tv/misterdatos",
   },
-
+  {
+    title: "¡Nuevo canal de YouTube!",
+    subtitle: "Visita mi nuevo canal dedicado a mi música.",
+    image: misterdatosweb2,
+    link: "https://www.youtube.com/@misterdatos_oficial",
+  },
 ];
 ---
 
@@ -23,17 +29,20 @@ const projects = [
           rel="noopener"
           class={`slide ${index === 0 ? "active" : ""}`}
           data-index={index}
+          aria-labelledby={`project-title-${index}`}
+          inert={index !== 0}
         >
           <Image
             src={project.image}
-            alt={project.title}
-            width={800}
-            height={400}
+            alt=""
+            width={project.image.width}
+            height={project.image.height}
             loading="eager"
-            quality="max"
+            fetchpriority={index === 0 ? "high" : "auto"}
+            quality={100}
           />
           <div class="info">
-            <h2>{project.title}</h2>
+            <h2 id={`project-title-${index}`}>{project.title}</h2>
             <p>{project.subtitle}</p>
           </div>
         </a>
@@ -42,7 +51,7 @@ const projects = [
   </div>
 
   <div class="controls-overlay">
-    <button id="pause-btn" class="control-icon" aria-label="Pause/Play"
+    <button id="pause-btn" class="control-icon" aria-label="Pausar presentación"
     ></button>
 
     <div class="thumbnails">
@@ -51,14 +60,16 @@ const projects = [
           <button
             class={`thumb-btn ${index === 0 ? "selected" : ""}`}
             data-index={index}
+            aria-label={`Mostrar: ${project.title}`}
+            aria-pressed={index === 0 ? "true" : "false"}
           >
             <Image
               src={project.image}
-              alt={`Thumbnail ${index}`}
+              alt=""
               width={50}
               height={50}
               loading="eager"
-              quality="max"
+              quality={100}
             />
           </button>
         ))
@@ -257,11 +268,17 @@ const projects = [
     if (!pauseBtn || totalSlides === 0) return;
 
     function showSlide(index: number) {
-      slides.forEach((s) => s.classList.remove("active"));
-      thumbs.forEach((t) => t.classList.remove("selected"));
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === index;
+        slide.classList.toggle("active", isActive);
+        slide.toggleAttribute("inert", !isActive);
+      });
+      thumbs.forEach((thumb, thumbIndex) => {
+        const isSelected = thumbIndex === index;
+        thumb.classList.toggle("selected", isSelected);
+        thumb.setAttribute("aria-pressed", String(isSelected));
+      });
 
-      slides[index].classList.add("active");
-      thumbs[index].classList.add("selected");
       currentIndex = index;
     }
 
@@ -298,6 +315,10 @@ const projects = [
     pauseBtn.addEventListener("click", () => {
       isPaused = !isPaused;
       pauseBtn.classList.toggle("is-paused", isPaused);
+      pauseBtn.setAttribute(
+        "aria-label",
+        isPaused ? "Reanudar presentación" : "Pausar presentación",
+      );
       if (isPaused) stopSlideShow();
       else startSlideShow();
     });

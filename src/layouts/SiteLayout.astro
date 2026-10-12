@@ -1,5 +1,11 @@
 ---
-import BaseHead from "../components/basehead.astro";
+import SiteHead from "../components/SiteHead.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteNavbar from "../components/SiteNavbar.astro";
+
+interface Props {
+	title: string;
+}
 
 const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 ---
@@ -7,13 +13,17 @@ const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 <!doctype html>
 <html lang="es">
 	<head>
-		<BaseHead />
+		<SiteHead />
 		<title>{title}</title>
 	</head>
 	<body>
+		<header>
+			<SiteNavbar />
+		</header>
 		<main>
 			<slot />
 		</main>
+		<SiteFooter />
 		<style is:global>
 			:root {
 				--color-primary: #a588ff;
@@ -39,12 +49,9 @@ const { title = "MisterDatos | Sitio Web Oficial" } = Astro.props;
 				color: var(--color-white);
 				overflow-x: hidden;
 			}
-			main {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				min-height: 100vh;
-				padding: 20px;
+			header {
+				width: 100%;
+				z-index: 1000;
 			}
 		</style>
 	</body>

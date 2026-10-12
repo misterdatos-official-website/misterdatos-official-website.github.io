@@ -11,7 +11,7 @@ const {
 ---
 
 <footer class={className} id="redes">
-    <div class="social-container">
+    <nav class="social-container" aria-label="Redes sociales">
         <button
             type="button"
             id="youtube-dialog-button"
@@ -131,7 +131,8 @@ const {
                 ></path>
             </svg>
         </a>
-    </div>
+    </nav>
+    <p class="copyright">{copyrightText}</p>
     <dialog id="youtube-dialog" aria-labelledby="youtube-dialog-title">
         <div class="dialog-header">
             <h2 id="youtube-dialog-title">Canales de YouTube</h2>
@@ -180,7 +181,6 @@ const {
             </a>
         </div>
     </dialog>
-    <p>{copyrightText}</p>
 </footer>
 
 <script>
@@ -224,74 +224,83 @@ const {
 
 <style>
     .Footer {
-        text-align: center;
-        padding: 30px 20px;
+        padding: 2.5rem 1.25rem 1.5rem;
+        border-top: 1px solid rgb(165 136 255 / 35%);
         background: #221425;
-        border-top: 1px solid #a588ff;
+        color: #fff;
+        text-align: center;
     }
 
     .social-container {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 15px;
+        gap: 0.75rem;
+        max-width: 34rem;
+        margin: 0 auto 1.5rem;
     }
 
     .social-icon {
-        width: 40px;
-        height: 40px;
+        display: grid;
+        width: 2.75rem;
+        height: 2.75rem;
+        place-items: center;
+        border: 1px solid rgb(165 136 255 / 35%);
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        border: 0;
+        background: rgb(165 136 255 / 9%);
+        color: #e0d7ff;
+        transition:
+            transform 180ms ease,
+            border-color 180ms ease,
+            background-color 180ms ease,
+            color 180ms ease;
         cursor: pointer;
     }
 
-    .social-icon:hover {
-        transform: scale(1.1);
-        filter: brightness(1.2);
+    .social-icon:hover,
+    .social-icon:focus-visible {
+        transform: translateY(-3px);
+        border-color: #a588ff;
+        background: rgb(165 136 255 / 20%);
+        color: #fff;
     }
 
-    .youtube {
-        background-color: #ff0000;
+    .social-icon:focus-visible,
+    .dialog-close:focus-visible,
+    .youtube-channels a:focus-visible,
+    .tiktok-accounts a:focus-visible {
+        outline: 2px solid #c6b5ff;
+        outline-offset: 3px;
     }
-    .twitch {
-        background-color: #9146ff;
+
+    .social-icon svg {
+        width: 1.25rem;
+        height: 1.25rem;
     }
-    .tiktok {
-        background-color: #010101;
-        border: 1px solid #444;
+
+    .copyright {
+        max-width: 70rem;
+        margin: 0 auto;
+        padding-top: 1rem;
+        border-top: 1px solid rgb(255 255 255 / 10%);
+        text-align: center;
+        text-wrap: balance;
     }
-    .instagram {
-        background: linear-gradient(
-            45deg,
-            #f09433 0%,
-            #e6683c 25%,
-            #dc2743 50%,
-            #cc2366 75%,
-            #bc1888 100%
-        );
-    }
-    .facebook {
-        background-color: #1877f2;
-    }
-    .discord {
-        background-color: #5865f2;
+
+    .Footer .copyright {
+        margin: 0 auto;
+        color: rgb(255 255 255 / 58%);
+        font: 400 0.78rem/1.5 system-ui, sans-serif;
     }
 
     dialog {
         width: min(90vw, 420px);
         margin: auto;
-        padding: 24px;
+        padding: clamp(1.25rem, 4vw, 1.75rem);
         color: #ffffff;
         background: #221425;
-        border: 1px solid #a588ff;
-        border-radius: 12px;
+        border: 1px solid rgb(165 136 255 / 65%);
+        border-radius: 1.25rem;
         box-shadow: 0 18px 60px rgb(0 0 0 / 45%);
     }
 
@@ -308,7 +317,8 @@ const {
     }
 
     .dialog-header h2 {
-        font-size: 1rem;
+        margin: 0;
+        font: 700 1rem/1.4 system-ui, sans-serif;
         color: #ffffff;
     }
 
@@ -322,13 +332,13 @@ const {
         font-size: 1.5rem;
         line-height: 1;
         background: transparent;
-        border: 1px solid rgb(255 255 255 / 35%);
+        border: 1px solid rgb(165 136 255 / 40%);
         border-radius: 50%;
         cursor: pointer;
     }
 
     .dialog-close:hover {
-        background: rgb(255 255 255 / 12%);
+        background: rgb(165 136 255 / 18%);
     }
 
     .youtube-channels {
@@ -340,14 +350,16 @@ const {
         display: block;
         padding: 14px 16px;
         color: #ffffff;
-        background: #ff0000;
-        border-radius: 6px;
+        background: rgb(165 136 255 / 12%);
+        border: 1px solid rgb(165 136 255 / 30%);
+        border-radius: 0.75rem;
         text-decoration: none;
-        transition: filter 0.3s ease, transform 0.3s ease;
+        transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
     }
 
     .youtube-channels a:hover {
-        filter: brightness(1.2);
+        background: rgb(165 136 255 / 22%);
+        border-color: #a588ff;
         transform: translateX(4px);
     }
 
@@ -360,21 +372,24 @@ const {
         display: block;
         padding: 14px 16px;
         color: #ffffff;
-        background: #010101;
-        border: 1px solid #444;
-        border-radius: 6px;
+        background: rgb(165 136 255 / 12%);
+        border: 1px solid rgb(165 136 255 / 30%);
+        border-radius: 0.75rem;
         text-decoration: none;
-        transition: filter 0.3s ease, transform 0.3s ease;
+        transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
     }
 
     .tiktok-accounts a:hover {
-        filter: brightness(1.2);
+        background: rgb(165 136 255 / 22%);
+        border-color: #a588ff;
         transform: translateX(4px);
     }
 
-    .Footer p {
-        font-size: 0.7rem;
-        color: #ffffff;
-        margin: 0;
+    @media (prefers-reduced-motion: reduce) {
+        .social-icon,
+        .youtube-channels a,
+        .tiktok-accounts a {
+            transition: none;
+        }
     }
 </style>
