@@ -39,6 +39,7 @@ const recentPosts = allPosts
                                         alt={post.data.title}
                                         loading={"lazy"}
                                         decoding={"async"}
+                                        format="png"
                                         quality={100}
                                     />
                                     <h3 class="post-title">{post.data.title}</h3>
@@ -87,9 +88,9 @@ const recentPosts = allPosts
 
 <style>
     .blog-section {
-        padding: 1rem 1rem;
-        max-width: 1200px;
-        margin: 0px auto;
+        width: min(100%, var(--home-content-max));
+        padding: var(--home-section-space) var(--home-page-gutter);
+        margin-inline: auto;
         color: #ffffff;
         background-color: var(--surface-page);
         scroll-margin-top: 80px;
@@ -144,12 +145,12 @@ const recentPosts = allPosts
 
     .posts-slider {
         display: flex;
-        gap: 1.5rem;
+        gap: var(--home-content-gap);
     }
 
     .post-card-link {
         text-decoration: none;
-        flex: 0 0 280px;
+        flex: 0 0 calc((100% - var(--home-content-gap)) / 2);
         display: flex;
         -webkit-tap-highlight-color: transparent;
         outline: none;
@@ -157,8 +158,11 @@ const recentPosts = allPosts
 
     .post-card {
         --card-content-inset: 1rem;
-        display: flex;
-        flex-direction: column;
+        position: relative;
+        display: block;
+        width: 100%;
+        min-height: clamp(210px, 62vw, 280px);
+        isolation: isolate;
         background: var(--surface-raised);
         border-radius: 15px;
         overflow: hidden;
@@ -182,21 +186,31 @@ const recentPosts = allPosts
     }
 
     .post-image img {
+        position: absolute;
+        inset: 0;
         display: block;
         width: 100%;
-        height: 180px;
+        height: 100%;
         object-fit: cover;
+        background: #170f1a;
     }
 
     .post-image {
-        position: relative;
+        position: absolute;
+        inset: 0;
         isolation: isolate;
+        z-index: -1;
     }
 
     .post-image::after {
         position: absolute;
-        inset: 35% 0 0;
-        background: linear-gradient(transparent, rgb(0 0 0 / 82%));
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgb(0 0 0 / 4%) 20%,
+            rgb(0 0 0 / 24%) 48%,
+            rgb(0 0 0 / 82%) 100%
+        );
         content: "";
         pointer-events: none;
     }
@@ -212,16 +226,32 @@ const recentPosts = allPosts
     .post-image .post-title {
         position: absolute;
         right: var(--card-content-inset);
-        bottom: var(--card-content-inset);
+        bottom: calc(var(--card-content-inset) + 3.5rem);
         left: var(--card-content-inset);
         z-index: 1;
         padding: 0;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
         text-shadow: 0 1px 4px rgb(0 0 0 / 75%);
+    }
+
+    .post-card > .post-title {
+        position: relative;
+        z-index: 1;
+        padding: var(--card-content-inset);
+        color: #fff;
     }
 
     .read-article {
         min-height: 2.75rem;
-        margin: auto var(--card-content-inset) var(--card-content-inset);
+        position: absolute;
+        right: var(--card-content-inset);
+        bottom: var(--card-content-inset);
+        left: var(--card-content-inset);
+        z-index: 2;
+        margin: 0;
         padding: 0.65rem 0.9rem;
         display: inline-flex;
         align-items: center;
@@ -262,7 +292,7 @@ const recentPosts = allPosts
     .view-all-container {
         display: flex;
         justify-content: center;
-        padding: 0.75rem 0 1rem;
+        padding-top: var(--home-content-gap);
     }
 
     .btn-all {
@@ -334,7 +364,10 @@ const recentPosts = allPosts
             display: flex;
         }
         .post-card-link {
-            flex: 0 0 320px;
+            flex-basis: 320px;
+        }
+        .post-card {
+            min-height: 320px;
         }
     }
 </style>

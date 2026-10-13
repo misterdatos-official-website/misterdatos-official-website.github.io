@@ -1,0 +1,381 @@
+---
+import type { FanartWork } from "../data/fanart";
+
+interface Props {
+  artworks: FanartWork[];
+}
+
+const { artworks } = Astro.props;
+const formatDate = (date: string) =>
+  new Date(`${date}T00:00:00Z`).toLocaleDateString("es-MX", {
+    dateStyle: "long",
+    timeZone: "UTC",
+  });
+---
+
+<section class="fanart-section" aria-labelledby="fanart-heading">
+  <header class="fanart-header">
+    <h1 id="fanart-heading">Galería Fanart</h1>
+    <p class="intro">
+      Una colección de dibujos hechos por la comunidad.
+    </p>
+  </header>
+
+  {
+    artworks.length > 0 ? (
+      <div class="fanart-grid">
+        {artworks.map((artwork) => (
+          <article class="fanart-card">
+            <button
+              class="fanart-open"
+              type="button"
+              aria-label={`Ampliar ${artwork.title}, obra de ${artwork.artist}`}
+              data-image={artwork.imageUrl}
+              data-alt={artwork.alt}
+              data-title={artwork.title}
+              data-artist={artwork.artist}
+              data-date={artwork.date ?? ""}
+            >
+              <img
+                src={artwork.imageUrl}
+                alt={artwork.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="view-hint">Ver obra</span>
+            </button>
+            <div class="fanart-caption">
+              <h2>{artwork.title}</h2>
+              <div class="artist-row">
+                <p>Por {artwork.artist}</p>
+                {artwork.artistSocialUrl && (
+                  <a
+                    class="artist-social-link"
+                    href={artwork.artistSocialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visitar las redes de ${artwork.artist} (se abre en una pestaña nueva)`}
+                    title={`Redes de ${artwork.artist}`}
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M11.5 3.5h5v5M16.2 3.8l-7 7M14 10.5v4a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 3 14.5v-8A1.5 1.5 0 0 1 4.5 5H9" />
+                    </svg>
+                    <span>Redes</span>
+                  </a>
+                )}
+              </div>
+              {artwork.date && <time datetime={artwork.date}>{formatDate(artwork.date)}</time>}
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p class="empty-title">¡Esta galería pronto tendrá color!</p>
+        <p>
+          Estamos preparando las primeras obras de la comunidad. Vuelve pronto
+          para descubrirlas.
+        </p>
+      </div>
+    )
+  }
+</section>
+
+<dialog class="fanart-dialog" id="fanart-dialog" aria-label="Vista ampliada de fanart">
+  <button
+    class="dialog-close"
+    id="dialog-close"
+    type="button"
+    aria-label="Cerrar vista ampliada"
+    autofocus
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m7 7 10 10M17 7 7 17" />
+    </svg>
+  </button>
+  <img class="dialog-image" id="dialog-image" src="" alt="" />
+</dialog>
+
+<style>
+  .fanart-section {
+    --gallery-title-copy-gap: 1rem;
+    --gallery-cards-gap: 1.5rem;
+    width: min(100% - 2rem, 1240px);
+    min-height: 60vh;
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  .fanart-header {
+    max-width: 720px;
+    margin: 0 auto var(--gallery-cards-gap);
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.75rem;
+    color: #c6b5ff;
+    font: 600 0.8rem/1.5 system-ui, sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .fanart-header h1 {
+    color: #fff;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    line-height: 1.25;
+  }
+
+  .intro {
+    margin-top: var(--gallery-title-copy-gap);
+    color: rgb(255 255 255 / 72%);
+    font: 400 1rem/1.7 system-ui, sans-serif;
+  }
+
+  .fanart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .fanart-card {
+    overflow: hidden;
+    border: 1px solid rgb(165 136 255 / 22%);
+    border-radius: 16px;
+    background: var(--surface-panel);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 18%);
+  }
+
+  .fanart-open {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    background: #170f1a;
+    cursor: zoom-in;
+  }
+
+  .fanart-open img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 220ms ease;
+  }
+
+  .view-hint {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.8rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid rgb(255 255 255 / 20%);
+    border-radius: 999px;
+    background: rgb(20 12 24 / 82%);
+    color: #fff;
+    font: 500 0.78rem/1.3 system-ui, sans-serif;
+  }
+
+  .fanart-open:hover img {
+    transform: scale(1.035);
+  }
+
+  .fanart-open:focus-visible,
+  .dialog-close:focus-visible {
+    outline: 3px solid #c6b5ff;
+    outline-offset: 3px;
+  }
+
+  .fanart-caption {
+    padding: 1rem 1.1rem 1.2rem;
+    font-family: system-ui, sans-serif;
+  }
+
+  .fanart-caption h2 {
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .artist-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.35rem;
+  }
+
+  .artist-row p,
+  .fanart-caption time {
+    display: block;
+    color: rgb(255 255 255 / 68%);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .artist-row p {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .fanart-caption time {
+    margin-top: 0.35rem;
+  }
+
+  .artist-social-link {
+    min-height: 2rem;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid rgb(198 181 255 / 45%);
+    border-radius: 999px;
+    background: rgb(165 136 255 / 10%);
+    color: #e3dbff;
+    font: 600 0.75rem/1 system-ui, sans-serif;
+    text-decoration: none;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .artist-social-link:hover {
+    border-color: #a588ff;
+    background: #a588ff;
+    color: #1b1220;
+  }
+
+  .artist-social-link:focus-visible {
+    outline: 2px solid #c6b5ff;
+    outline-offset: 3px;
+  }
+
+  .artist-social-link svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+  }
+
+  .empty-state {
+    max-width: 680px;
+    margin-inline: auto;
+    padding: clamp(2rem, 7vw, 4rem);
+    border: 1px solid rgb(165 136 255 / 24%);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgb(45 29 53 / 90%), rgb(36 23 42 / 85%));
+    color: rgb(255 255 255 / 74%);
+    font: 400 1rem/1.7 system-ui, sans-serif;
+    text-align: center;
+  }
+
+  .empty-title {
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .fanart-dialog {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: #fff;
+  }
+
+  .fanart-dialog:not([open]) {
+    display: none;
+  }
+
+  .fanart-dialog[open] {
+    display: grid;
+  }
+
+  .fanart-dialog::backdrop {
+    background: rgb(8 5 10 / 88%);
+    backdrop-filter: blur(5px);
+  }
+
+  .dialog-close {
+    position: absolute;
+    top: clamp(0.75rem, 3vw, 1.5rem);
+    right: clamp(0.75rem, 3vw, 1.5rem);
+    z-index: 1;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 28%);
+    border-radius: 999px;
+    background: rgb(45 29 53 / 90%);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .dialog-close svg {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 2;
+  }
+
+  .dialog-image {
+    width: auto;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 5rem);
+    max-height: calc(100dvh - 5rem);
+    display: block;
+    padding: 0.4rem;
+    border: 1px solid rgb(198 181 255 / 45%);
+    border-radius: 14px;
+    background: #140d18;
+    object-fit: contain;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fanart-open img,
+    .artist-social-link {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("#fanart-dialog");
+  const dialogImage = document.querySelector<HTMLImageElement>("#dialog-image");
+  const closeButton = document.querySelector<HTMLButtonElement>("#dialog-close");
+
+  document.querySelectorAll<HTMLButtonElement>(".fanart-open").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (!dialog || !dialogImage) return;
+
+      dialogImage.src = button.dataset.image ?? "";
+      dialogImage.alt = button.dataset.alt ?? "";
+      dialog.showModal();
+    });
+  });
+
+  closeButton?.addEventListener("click", () => dialog?.close());
+</script>

@@ -80,7 +80,7 @@ const projects = [
 
 <style>
   .slider-container {
-    --controls-height: 5rem;
+    --controls-height: clamp(4.5rem, 8vw, 5rem);
     width: 100%;
     background: var(--surface-page);
     color: var(--color-white);
@@ -92,7 +92,7 @@ const projects = [
 
   .main-display {
     position: relative;
-    height: 400px;
+    height: clamp(280px, 42vw, 420px);
   }
 
   .slide {
@@ -126,7 +126,8 @@ const projects = [
     bottom: var(--controls-height);
     left: 0;
     right: 0;
-    padding: 60px 20px 20px;
+    padding: clamp(2.5rem, 8vw, 3.75rem) var(--home-page-gutter)
+      var(--home-content-gap);
     z-index: 2;
     background: linear-gradient(
       to top,
@@ -137,10 +138,11 @@ const projects = [
 
   .info h2 {
     margin: 0;
-    font-size: 1.8rem;
+    font-size: clamp(1.25rem, 3vw, 1.8rem);
   }
   .info p {
-    margin: 5px 0 0;
+    margin: 0.35rem 0 0;
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
     opacity: 0.8;
   }
 
@@ -149,8 +151,8 @@ const projects = [
     min-height: var(--controls-height);
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    padding: 15px;
+    gap: var(--home-content-gap);
+    padding: var(--home-content-gap) var(--home-page-gutter);
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -217,12 +219,12 @@ const projects = [
 
   .thumbnails {
     display: flex;
-    gap: 10px;
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
   }
 
   .thumb-btn {
-    width: 50px;
-    height: 50px;
+    width: clamp(2.5rem, 7vw, 3.125rem);
+    height: clamp(2.5rem, 7vw, 3.125rem);
     border: 2px solid transparent;
     border-radius: 8px;
     overflow: hidden;

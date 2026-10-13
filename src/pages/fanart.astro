@@ -1,0 +1,9 @@
+---
+import FanartGallery from "../components/FanartGallery.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { fanartWorks } from "../data/fanart";
+---
+
+<SiteLayout title="Galería Fanart | MisterDatos">
+  <FanartGallery artworks={fanartWorks} />
+</SiteLayout>

@@ -44,6 +44,12 @@ const currentPath = Astro.url.pathname;
             aria-current={currentPath.startsWith("/blog") ? "page" : undefined}
           >Blog</a>
         </li>
+        <li>
+          <a
+            href="/fanart"
+            aria-current={currentPath.startsWith("/fanart") ? "page" : undefined}
+          >Fanart</a>
+        </li>
       </ul>
 
     </div>

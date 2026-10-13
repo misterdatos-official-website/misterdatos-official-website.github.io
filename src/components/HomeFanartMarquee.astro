@@ -1,0 +1,230 @@
+---
+import { fanartWorks } from "../data/fanart";
+
+const shuffledWorks = [...fanartWorks];
+for (let index = shuffledWorks.length - 1; index > 0; index--) {
+  const randomIndex = Math.floor(Math.random() * (index + 1));
+  [shuffledWorks[index], shuffledWorks[randomIndex]] = [
+    shuffledWorks[randomIndex],
+    shuffledWorks[index],
+  ];
+}
+
+const repeatedWorks =
+  shuffledWorks.length > 0
+    ? Array.from(
+        { length: Math.max(6, shuffledWorks.length * 2) },
+        (_, index) => shuffledWorks[index % shuffledWorks.length],
+      )
+    : [];
+const animationDuration = Math.max(24, repeatedWorks.length * 5);
+---
+
+{
+  repeatedWorks.length > 0 && (
+    <section class="fanart-marquee" aria-labelledby="home-fanart-heading">
+      <div class="marquee-header">
+        <div>
+          <p class="eyebrow">Arte de la comunidad</p>
+          <h2 id="home-fanart-heading">Fanart</h2>
+        </div>
+        <a class="gallery-link" href="/fanart">Ver toda la galería</a>
+      </div>
+
+      <div
+        class="marquee-window"
+        role="region"
+        aria-label="Fanarts de la comunidad desplazándose"
+        tabindex="0"
+        style={`--marquee-duration: ${animationDuration}s`}
+      >
+        <div class="marquee-track">
+          {[0, 1].map((copy) => (
+            <div class="marquee-group" aria-hidden={copy === 1 ? "true" : undefined}>
+              {repeatedWorks.map((artwork, index) => (
+                <a
+                  class="fanart-tile"
+                  href="/fanart"
+                  tabindex={copy === 1 ? -1 : undefined}
+                  aria-label={
+                    copy === 0
+                      ? `${artwork.title}, ilustrado por ${artwork.artist}. Ver galería de fanart.`
+                      : undefined
+                  }
+                >
+                  <img
+                    src={artwork.imageUrl}
+                    alt={copy === 0 ? artwork.alt : ""}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="tile-credit">
+                    <strong>{artwork.title}</strong>
+                    <span>Por {artwork.artist}</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .fanart-marquee {
+    padding-block: var(--home-section-space);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 0, rgb(165 136 255 / 10%), transparent 65%),
+      var(--surface-page);
+    color: #fff;
+  }
+
+  .marquee-header {
+    width: min(100%, var(--home-content-max));
+    margin: 0 auto var(--home-content-gap);
+    padding-inline: var(--home-page-gutter);
+    box-sizing: border-box;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--home-content-gap);
+  }
+
+  .eyebrow {
+    margin-bottom: 0.35rem;
+    color: #c6b5ff;
+    font: 600 0.72rem/1.4 system-ui, sans-serif;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .marquee-header h2 {
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    line-height: 1.3;
+  }
+
+  .gallery-link {
+    flex: 0 0 auto;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgb(198 181 255 / 55%);
+    border-radius: 999px;
+    color: #e3dbff;
+    font: 600 0.82rem/1.2 system-ui, sans-serif;
+    text-decoration: none;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .gallery-link:hover {
+    background: #a588ff;
+    color: #1b1220;
+  }
+
+  .gallery-link:focus-visible,
+  .marquee-window:focus-visible,
+  .fanart-tile:focus-visible {
+    outline: 2px solid #c6b5ff;
+    outline-offset: 4px;
+  }
+
+  .marquee-window {
+    overflow: hidden;
+    padding: 0.4rem 0;
+  }
+
+  .marquee-track,
+  .marquee-group {
+    display: flex;
+    width: max-content;
+  }
+
+  .marquee-track {
+    animation: fanart-scroll var(--marquee-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-group {
+    flex: 0 0 auto;
+    gap: var(--home-content-gap);
+    padding-right: var(--home-content-gap);
+  }
+
+  .marquee-window:hover .marquee-track,
+  .marquee-window:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .fanart-tile {
+    position: relative;
+    width: clamp(220px, 28vw, 320px);
+    aspect-ratio: 4 / 3;
+    flex: 0 0 auto;
+    overflow: hidden;
+    border: 1px solid rgb(165 136 255 / 35%);
+    border-radius: 16px;
+    background: var(--surface-raised);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .fanart-tile img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 240ms ease;
+  }
+
+  .fanart-tile:hover img {
+    transform: scale(1.04);
+  }
+
+  .tile-credit {
+    position: absolute;
+    inset: auto 0 0;
+    display: grid;
+    gap: 0.2rem;
+    padding: 2rem 1rem 0.85rem;
+    background: linear-gradient(transparent, rgb(12 7 16 / 92%));
+    font-family: system-ui, sans-serif;
+  }
+
+  .tile-credit strong {
+    font-size: 0.95rem;
+  }
+
+  .tile-credit span {
+    color: rgb(255 255 255 / 78%);
+    font-size: 0.8rem;
+  }
+
+  @keyframes fanart-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      will-change: auto;
+    }
+
+    .marquee-window {
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .fanart-tile img,
+    .gallery-link {
+      transition: none;
+    }
+  }
+</style>
