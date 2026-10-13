@@ -30,6 +30,7 @@ const formatDate = (date: string) =>
               class="fanart-open"
               type="button"
               aria-label={`Ampliar ${artwork.title}, obra de ${artwork.artist}`}
+              data-artwork-id={artwork.id}
               data-image={artwork.imageUrl}
               data-alt={artwork.alt}
               data-title={artwork.title}
@@ -104,6 +105,13 @@ const formatDate = (date: string) =>
     min-height: 60vh;
     margin-inline: auto;
     padding-block: clamp(3rem, 8vw, 6rem);
+    padding-block-start: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .fanart-section {
+      padding-block-start: clamp(2.5rem, 4vw, 3.5rem);
+    }
   }
 
   .fanart-header {
@@ -376,6 +384,12 @@ const formatDate = (date: string) =>
       dialog.showModal();
     });
   });
+
+  const artworkId = new URLSearchParams(window.location.search).get("obra");
+  const selectedArtwork = Array.from(
+    document.querySelectorAll<HTMLButtonElement>(".fanart-open"),
+  ).find((button) => button.dataset.artworkId === artworkId);
+  selectedArtwork?.click();
 
   closeButton?.addEventListener("click", () => dialog?.close());
 </script>

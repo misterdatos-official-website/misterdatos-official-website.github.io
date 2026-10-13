@@ -5,8 +5,7 @@ import { Image } from "astro:assets";
 const allPosts = await getCollection("blog");
 
 const recentPosts = allPosts
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, 10);
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <section class="blog-section" id="blog">

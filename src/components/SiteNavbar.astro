@@ -167,10 +167,7 @@ const currentPath = Astro.url.pathname;
     z-index: 3;
     width: 44px;
     height: 44px;
-    padding: 12px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 0;
     border: 1px solid rgb(255 255 255 / 14%);
     border-radius: 12px;
     background: rgb(255 255 255 / 5%);
@@ -178,13 +175,29 @@ const currentPath = Astro.url.pathname;
   }
 
   .menu-toggle span {
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    left: 10px;
+    width: auto;
     height: 2px;
     border-radius: 2px;
     background: #fff;
     transition:
       transform 180ms ease,
       opacity 180ms ease;
+  }
+
+  .menu-toggle span:first-child {
+    transform: translateY(calc(-50% - 7px));
+  }
+
+  .menu-toggle span:nth-child(2) {
+    transform: translateY(-50%);
+  }
+
+  .menu-toggle span:last-child {
+    transform: translateY(calc(-50% + 7px));
   }
 
   .nav-backdrop {
@@ -212,7 +225,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .navbar[data-menu-open="true"] .menu-toggle span:first-child {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(-50%) rotate(45deg);
   }
 
   .navbar[data-menu-open="true"] .menu-toggle span:nth-child(2) {
@@ -220,7 +233,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .navbar[data-menu-open="true"] .menu-toggle span:last-child {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
   }
 
   .menu-toggle:focus-visible,

@@ -44,11 +44,11 @@ const animationDuration = Math.max(24, repeatedWorks.length * 5);
               {repeatedWorks.map((artwork, index) => (
                 <a
                   class="fanart-tile"
-                  href="/fanart"
+                  href={`/fanart?obra=${encodeURIComponent(artwork.id)}`}
                   tabindex={copy === 1 ? -1 : undefined}
                   aria-label={
                     copy === 0
-                      ? `${artwork.title}, ilustrado por ${artwork.artist}. Ver galería de fanart.`
+                      ? `${artwork.title}, ilustrado por ${artwork.artist}. Ver obra ampliada en la galería.`
                       : undefined
                   }
                 >
