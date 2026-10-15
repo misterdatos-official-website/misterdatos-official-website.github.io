@@ -18,6 +18,14 @@ export const fanartWorks: FanartWork[] = [
     alt: "Dibujo de MisterFurry por Bumblebee Art",
   },
   {
+    id: "misteroso-by-novastellar",
+    title: "MisterOso",
+    artist: "NovaStellar",
+    artistSocialUrl: "https://www.youtube.com/@NovaStargazer03",
+    imageUrl: "https://i.ibb.co/PvTj2g8q/Mister-Furry.png",
+    alt: "Fanart de MisterOso por NovaStellar",
+  },
+  {
     id: "mister-drama-total-fullbody",
     title: "Mister Drama Total Fullbody",
     artist: "DuskNevil",
