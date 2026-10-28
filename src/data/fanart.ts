@@ -18,6 +18,14 @@ export const fanartWorks: FanartWork[] = [
     alt: "Dibujo de MisterFurry por Bumblebee Art",
   },
   {
+    id: "misterfurryoso-brxcer",
+    title: "MisterFurryOso",
+    artist: "brxcer_star",
+    artistSocialUrl: "https://www.instagram.com/brxcer_star/",
+    imageUrl: "https://i.ibb.co/JR3L4QNq/misterfurry.png",
+    alt: "Fanart de MisterFurryOso por brxcer_star",
+  },
+  {
     id: "misteroso-by-novastellar",
     title: "MisterOso",
     artist: "NovaStellar",

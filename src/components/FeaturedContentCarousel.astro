@@ -19,7 +19,7 @@ const projects = [
 ];
 ---
 
-<div class="slider-container">
+<section class="slider-container" aria-label="Contenido destacado">
   <div id="main-display" class="main-display">
     {
       projects.map((project, index) => (
@@ -35,11 +35,11 @@ const projects = [
           <Image
             src={project.image}
             alt=""
-            width={project.image.width}
-            height={project.image.height}
-            loading="eager"
+            widths={[640, 960, 1280]}
+            sizes="100vw"
+            loading={index === 0 ? "eager" : "lazy"}
             fetchpriority={index === 0 ? "high" : "auto"}
-            quality={100}
+            quality={85}
           />
           <div class="info">
             <h2 id={`project-title-${index}`}>{project.title}</h2>
@@ -69,12 +69,12 @@ const projects = [
               width={50}
               height={50}
               loading="eager"
-              quality={100}
+              quality={82}
             />
           </button>
         ))
       }
-    </div>
+    </section>
   </div>
 </div>
 
@@ -202,7 +202,13 @@ const projects = [
 
   .control-icon:hover {
     border-color: var(--color-white);
-    box-shadow: 0 0 10px var(--color-purple);
+    box-shadow: 0 0 10px var(--color-primary);
+  }
+
+  .control-icon:focus-visible,
+  .thumb-btn:focus-visible {
+    outline: 2px solid #c6b5ff;
+    outline-offset: 3px;
   }
 
   .control-icon.is-paused::before {
@@ -255,6 +261,16 @@ const projects = [
   .thumb-btn.selected img {
     opacity: 1;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide,
+    .control-icon,
+    .control-icon::before,
+    .control-icon::after,
+    .thumb-btn {
+      transition: none;
+    }
+  }
 </style>
 
 <script>
@@ -267,8 +283,17 @@ const projects = [
     const thumbs = document.querySelectorAll(".thumb-btn");
     const pauseBtn = document.getElementById("pause-btn");
     const totalSlides = slides.length;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     if (!pauseBtn || totalSlides === 0) return;
+    isPaused = prefersReducedMotion;
+    pauseBtn.classList.toggle("is-paused", isPaused);
+    pauseBtn.setAttribute(
+      "aria-label",
+      isPaused ? "Reanudar presentación" : "Pausar presentación",
+    );
 
     function showSlide(index: number) {
       slides.forEach((slide, slideIndex) => {
@@ -304,7 +329,7 @@ const projects = [
       }
     }
 
-    startSlideShow();
+    if (!isPaused) startSlideShow();
 
     thumbs.forEach((btn) => {
       btn.addEventListener("click", () => {

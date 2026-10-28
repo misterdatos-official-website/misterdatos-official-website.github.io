@@ -36,10 +36,11 @@ const recentPosts = allPosts
                                     <Image
                                         src={post.data.image}
                                         alt={post.data.title}
-                                        loading={"lazy"}
-                                        decoding={"async"}
-                                        format="png"
-                                        quality={100}
+                                        loading="lazy"
+                                        decoding="async"
+                                        widths={[320, 640, 960]}
+                                        sizes="(max-width: 767px) 82vw, 320px"
+                                        quality={82}
                                     />
                                     <h3 class="post-title">{post.data.title}</h3>
                                 </div>

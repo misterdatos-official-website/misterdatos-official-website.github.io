@@ -23,7 +23,10 @@ const publishDate = entry.data.date.toLocaleDateString("es-ES", {
 const youtubeVideoId = entry.data.youtubeId;
 ---
 
-<SiteLayout title={entry.data.title}>
+<SiteLayout
+  title={`${entry.data.title} | MisterDatos`}
+  description={entry.data.description ?? entry.data.title}
+>
   <article class="post-container">
     <header class="post-header">
       <a class="back-link" href="/blog">
@@ -87,7 +90,7 @@ const youtubeVideoId = entry.data.youtubeId;
               fetchpriority="high"
               widths={[640, 960, 1280]}
               sizes="(max-width: 900px) calc(100vw - 2rem), 860px"
-              quality={100}
+              quality={85}
             />
           </div>
         )

@@ -9,7 +9,14 @@ const sortedPosts = allPosts.sort(
 );
 ---
 
-<SiteLayout title="Publicaciones | MisterDatos">
+<SiteLayout
+  title="Blog | MisterDatos"
+  description="Artículos de MisterDatos sobre videojuegos, proyectos, música y más."
+>
+  <section class="blog-intro" aria-labelledby="blog-heading">
+    <h1 id="blog-heading">El blog de MisterDatos</h1>
+  </section>
+
   <div class="search-section">
     <div class="search-area">
       <div class="search-wrapper" role="search">
@@ -24,6 +31,7 @@ const sortedPosts = allPosts.sort(
           placeholder="Ej. Pokémon, Zelda, Kirby..."
           autocomplete="off"
           aria-describedby="search-info"
+          aria-controls="posts-container"
         />
       </div>
       <div id="search-info" class="search-info" aria-live="polite">
@@ -32,7 +40,8 @@ const sortedPosts = allPosts.sort(
     </div>
   </div>
 
-  <div class="blog-grid" id="posts-container">
+  <section class="posts-section" aria-label="Artículos del blog">
+    <div class="blog-grid" id="posts-container">
     {
       sortedPosts.map((post) => (
         <BlogPostCard
@@ -46,16 +55,30 @@ const sortedPosts = allPosts.sort(
         />
       ))
     }
-    
-    <div id="no-results" class="no-results" style="display: none;">
-      <p>No se encontraron publicaciones con ese nombre 😅</p>
+      <div id="no-results" class="no-results" style="display: none;" role="status">
+        <p>No se encontraron publicaciones con ese nombre 😅</p>
+      </div>
     </div>
-  </div>
+  </section>
 </SiteLayout>
 
 <style>
+  .blog-intro {
+    width: min(100% - 2rem, 760px);
+    margin-inline: auto;
+    padding: clamp(2.75rem, 7vw, 5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+    text-align: center;
+  }
+
+  .blog-intro h1 {
+    color: #fff;
+    font: 750 clamp(2rem, 5vw, 3.5rem)/1.12 var(--font-body);
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
   .search-section {
-    padding: 2rem 1rem 0;
+    padding: 0 1rem;
     display: flex;
     justify-content: center;
   }
@@ -134,6 +157,12 @@ const sortedPosts = allPosts.sort(
     font: 400 0.78rem/1.5 system-ui, sans-serif;
   }
 
+  .posts-section {
+    width: min(100%, 1320px);
+    margin-inline: auto;
+    padding: clamp(1.75rem, 4vw, 2.5rem) 1rem 3rem;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .search-wrapper {
       transition: none;
@@ -146,19 +175,22 @@ const sortedPosts = allPosts.sort(
     justify-content: center;
     align-items: stretch;
     gap: clamp(1rem, 2vw, 1.5rem);
-    width: min(100%, 1320px);
     box-sizing: border-box;
-    margin-inline: auto;
-    padding: 2rem 1rem;
-    min-height: 400px;
+    min-height: 12rem;
   }
 
   .no-results {
     grid-column: 1 / -1;
     color: #ffffff;
     font-size: 1.2rem;
-    padding: 3rem;
+    padding: clamp(2rem, 5vw, 3rem);
     text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    .search-section {
+      padding-inline: 1.25rem;
+    }
   }
 </style>
 
@@ -172,12 +204,17 @@ const sortedPosts = allPosts.sort(
     if (!searchInput) return;
 
     searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase().trim();
+      const normalize = (value: string) =>
+        value
+          .toLocaleLowerCase("es")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+      const query = normalize(searchInput.value.trim());
       let foundCount = 0;
 
       posts.forEach((post) => {
-        const title = post.getAttribute('data-title') || "";
-        const desc = post.getAttribute('data-description') || "";
+        const title = normalize(post.getAttribute('data-title') || "");
+        const desc = normalize(post.getAttribute('data-description') || "");
 
         if (title.includes(query) || desc.includes(query)) {
           (post as HTMLElement).style.display = 'block';

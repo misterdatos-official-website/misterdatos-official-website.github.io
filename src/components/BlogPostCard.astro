@@ -35,7 +35,9 @@ const formattedDate = date.toLocaleDateString("es-ES", {
             alt=""
             loading="lazy"
             decoding="async"
-            format="png"
+            widths={[320, 640, 960]}
+            sizes="(max-width: 680px) calc(100vw - 2rem), (max-width: 1000px) 44vw, 380px"
+            quality={82}
           />
         </div>
       )
